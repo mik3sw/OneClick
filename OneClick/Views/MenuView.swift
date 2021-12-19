@@ -15,6 +15,11 @@ struct MenuView: View {
     @State var selected2: Bool = false
     @State var selected3: Bool = false
     @State var selected4: Bool = false
+    @State var selected5: Bool = false
+    @State var selected6: Bool = false
+    @State var icn: String = "sun.max.fill"
+    @State var eye: String = "eye.slash.fill"
+    @State var battery: String = "battery.25"
 
     var body: some View {
         
@@ -59,15 +64,12 @@ struct MenuView: View {
                             .frame(alignment: .leading)
                             .padding(.top, 15.0)
                             .onChange(of: selected1) { value in
-                                //perform your action here...
+                                
                                 if (value){
-                                    comando(arg: "defaults write com.apple.finder CreateDesktop false ; killall Finder")
-                                    // comando(arg: "killall Finder")
+                                    comando(arg: hideDesktop)
                                 }
                                 else{
-                                    comando(arg: "defaults write com.apple.finder CreateDesktop true ; killall Finder")
-                                    // comando(arg: "killall Finder")
-                                    
+                                    comando(arg: showDesktop)
                                 }
                             }
                     } else {
@@ -81,51 +83,89 @@ struct MenuView: View {
                 .padding(.leading, 15.0)
                 .padding(.top, 5.0)
             
-            
-            HStack(
-                spacing: 0){
-//                    folder.fill
-                    Image(systemName: "folder.fill")
-                        .padding(.top, 15.0)
-                        .padding(.leading, 15.0)
-                        .frame(width: 40, alignment: .leading)
-                    Text("Hidden Files")
-                        .fontWeight(.medium)
-                        .padding(.top, 15.0)
-                        .frame(width: 200, alignment: .leading)
-                        
+                Group{
+                    HStack(
+                        spacing: 0){
+        //                    folder.fill
+                            Image(systemName: "folder.fill")
+                                .padding(.top, 15.0)
+                                .padding(.leading, 15.0)
+                                .frame(width: 40, alignment: .leading)
+                            Text("Hidden Files")
+                                .fontWeight(.medium)
+                                .padding(.top, 15.0)
+                                .frame(width: 200, alignment: .leading)
+                                
+                            
+                            Toggle("", isOn: $selected2)
+                                .toggleStyle(.switch)
+                                .frame(alignment: .leading)
+                                .padding(.top, 15.0)
+                                .onChange(of: selected2) { value in
+                                    
+                                    if(value){
+                                        comando(arg: showHiddenFiles)
+                                    }
+                                    else{
+                                        comando(arg: hideHiddenFiles)
+                                    }
+                                }
+                    }
                     
-                    Toggle("", isOn: $selected2)
-                        .toggleStyle(.switch)
-                        .frame(alignment: .leading)
-                        .padding(.top, 15.0)
-                        .onChange(of: selected2) { value in
-                            //perform your action here...
-                            if(value){
-                                
-                                comando(arg: "defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder")
-                                // comando(arg: "killall Finder")
-                                
-                            }else{
-                                comando(arg: "defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder")
-                                //comando(arg: "killall Finder")
-                            }
-                        }
-                
-            }
+                    Text("Hide/show hidden files and folders everywhere")
+                        .font(Font.system(size: 12.0))
+                        .fontWeight(.light)
+                        .padding(.leading, 15.0)
+                        .padding(.top, 5.0)
+                }
             
-            Text("Hide/show hidden files and folders everywhere")
-                .font(Font.system(size: 12.0))
-                .fontWeight(.light)
-                .padding(.leading, 15.0)
-                .padding(.top, 5.0)
+                
+                
+                Group{
+                    HStack(
+                        spacing: 0){
+                            
+                            Image(systemName: "dock.rectangle")
+                                .padding(.top, 15.0)
+                                .padding(.leading, 15.0)
+                                .frame(width: 40, alignment: .leading)
+                            
+                            Text("Hide/show dock")
+                                .fontWeight(.medium)
+                                .padding(.top, 15.0)
+                                .frame(width: 200, alignment: .leading)
+                                
+                            
+                            Toggle("", isOn: $selected6)
+                                .toggleStyle(.switch)
+                                .frame(alignment: .leading)
+                                .padding(.top, 15.0)
+                                .onChange(of: selected6) { value in
+                                    
+                                    if(value){
+                                        comando(arg: setAutohideDockOn)
+                                        
+                                    }
+                                    else{
+                                        comando(arg: setAutohideDockOff)
+                                        
+                                    }
+                                }
+                            }
+                    
+                    Text("Enable/disable dock autohiding")
+                        .font(Font.system(size: 12.0))
+                        .fontWeight(.light)
+                        .padding(.leading, 15.0)
+                        .padding(.top, 5.0)
+                }
                 
                 
             
                 HStack(
                     spacing: 0){
                         
-                        Image(systemName: "battery.75")
+                        Image(systemName: battery)
                             .padding(.top, 15.0)
                             .padding(.leading, 15.0)
                             .frame(width: 40, alignment: .leading)
@@ -141,23 +181,56 @@ struct MenuView: View {
                             .frame(alignment: .leading)
                             .padding(.top, 15.0)
                             .onChange(of: selected4) { value in
-                                //perform your action here...
-                                if(value){
-                                    
-                                    comando(arg: "osascript -e 'do shell script \"pmset -a lowpowermode 1\" with administrator privileges'")
-                                    // comando(arg: "killall Finder")
-                                    
-                                    
-                                }else{
-                                    comando(arg: "osascript -e 'do shell script \"pmset -a lowpowermode 0\" with administrator privileges'")
-                                    //comando(arg: "killall Finder")
                                 
+                                if(value){
+                                    comando(arg: batterySavingOn)
+                                    battery = "battery.75"
+                                }
+                                else{
+                                    comando(arg: batterySavingOff)
+                                    battery = "battery.25"
                                 }
                             }
-                    
-                }
+                        }
                 
                 Text("Enable/disable battery saving (need root access)")
+                    .font(Font.system(size: 12.0))
+                    .fontWeight(.light)
+                    .padding(.leading, 15.0)
+                    .padding(.top, 5.0)
+                
+                HStack(
+                    spacing: 0){
+                        
+                        Image(systemName: icn)
+                            .padding(.top, 15.0)
+                            .padding(.leading, 15.0)
+                            .frame(width: 40, alignment: .leading)
+                        
+                        Text("Dark Mode")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 200, alignment: .leading)
+                            
+                        
+                        Toggle("", isOn: $selected5)
+                            .toggleStyle(.switch)
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                            .onChange(of: selected5) { value in
+                                
+                                if(value){
+                                    comando(arg: darkModeOn)
+                                    icn = "moon.stars.fill"
+                                }
+                                else{
+                                    comando(arg: darkModeOff)
+                                    icn = "sun.max.fill"
+                                }
+                            }
+                        }
+                
+                Text("Enable/disable dark mode")
                     .font(Font.system(size: 12.0))
                     .fontWeight(.light)
                     .padding(.leading, 15.0)
@@ -166,7 +239,7 @@ struct MenuView: View {
             
             HStack(spacing: 0){
                 
-                Image(systemName: "eye.fill")
+                Image(systemName: eye)
                     .padding(.top, 15.0)
                     .padding(.leading, 15.0)
                     .frame(width: 40, alignment: .leading)
@@ -185,12 +258,12 @@ struct MenuView: View {
                             //perform your action here...
                             if(value){
                                 
-                                comando(arg: "caffeinate")
-                                // comando(arg: "killall Finder")
+                                comando(arg: caffeinateOn)
+                                eye = "eye.fill"
                                 
                             }else{
-                                comando(arg: "killall caffeinate")
-                                //comando(arg: "killall Finder")
+                                comando(arg: caffeinateOff)
+                                eye = "eye.slash.fill"
                             }
                         }
             }
@@ -206,6 +279,46 @@ struct MenuView: View {
             
             
             
+            
+            
+            Divider()
+                .padding(.horizontal, 10.0)
+                .frame(width: 300)
+            
+            
+            Group{
+                
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "trash")
+                        .padding(.bottom, 15.0)
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+//                      .renderingMode(.original)
+                        
+                        Text("Empty Trash")
+                            .fontWeight(.medium)
+                            .padding(.bottom, 15.0)
+                            .padding(.top, 15.0)
+                            .frame(width: 200, alignment: .leading)
+                            
+                        
+                    Button(action: {
+                        comando(arg: emptyTrash)
+                    }){
+                        Text("Clear")
+                    }
+                            .frame(alignment: .leading)
+                            .padding(.bottom, 15.0)
+                            .padding(.top, 15.0)
+                            .cornerRadius(25)
+                            
+                            
+                            
+                }
+                
+            }
             
             
             Divider()

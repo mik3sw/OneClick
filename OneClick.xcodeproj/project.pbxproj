@@ -14,6 +14,7 @@
 		A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624B237B003900A2BA73 /* StatusBarController.swift */; };
 		A70B6250237B022700A2BA73 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624F237B022700A2BA73 /* MainViewController.swift */; };
 		A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B6251237B078200A2BA73 /* EventMonitor.swift */; };
+		B76B2E3F276F775E008E6460 /* ShellCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B2E3E276F775E008E6460 /* ShellCommands.swift */; };
 		B7D22575276A863A003286EC /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D22574276A863A003286EC /* MenuView.swift */; };
 		B7D225B0276A8E24003286EC /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D225AF276A8E24003286EC /* Functions.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		A70B624F237B022700A2BA73 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A70B6251237B078200A2BA73 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		B757C998276CE0EE004BC3F4 /* OneClick-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OneClick-Bridging-Header.h"; sourceTree = "<group>"; };
+		B76B2E3E276F775E008E6460 /* ShellCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellCommands.swift; sourceTree = "<group>"; };
 		B7D22574276A863A003286EC /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B7D225AF276A8E24003286EC /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +66,7 @@
 		A70B6232237AF87000A2BA73 /* OneClick */ = {
 			isa = PBXGroup;
 			children = (
+				B76B2E3D276F7727008E6460 /* Commands */,
 				B7D225AF276A8E24003286EC /* Functions.swift */,
 				A70B6233237AF87000A2BA73 /* AppDelegate.swift */,
 				A70B6249237B000700A2BA73 /* Helpers */,
@@ -102,6 +105,14 @@
 				B7D22574276A863A003286EC /* MenuView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B76B2E3D276F7727008E6460 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				B76B2E3E276F775E008E6460 /* ShellCommands.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7D22575276A863A003286EC /* MenuView.swift in Sources */,
+				B76B2E3F276F775E008E6460 /* ShellCommands.swift in Sources */,
 				B7D225B0276A8E24003286EC /* Functions.swift in Sources */,
 				A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */,
 				A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */,
