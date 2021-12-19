@@ -12,7 +12,7 @@ It only emulates terminal commands from a GUI
 * Intel app
 * Apple Silicon app
 
-## Functions
+## Functions v 1.2 pre-release
 
 ### Hide/Show desktop
 Commands:
@@ -27,6 +27,12 @@ Commands:
 * ```defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder```
 * ```defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder```
 
+### Hide/Show dock
+Commands:
+
+* ```osascript -e 'tell application \"System Events\" to set the autohide of the dock preferences to true'```
+* ```osascript -e 'tell application \"System Events\" to set the autohide of the dock preferences to false'```
+
 ### Enable/disable power saving
 Commands:
 
@@ -34,11 +40,25 @@ Commands:
 * ```osascript -e 'do shell script \"pmset -a lowpowermode 0\" with administrator privileges'```
 * these commands need root access (the app will ask for administrator password or touchID)
 
+### Enable/disable dark mode
+Commands:
+
+* ```osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to true'```
+* ```osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to false'```
+
+
 ### Caffeinate
 Commands:
 
 * ```caffeinate```
 * ```killall caffeinate```
+
+
+### Empty trash
+Command:
+
+* ```osascript -e 'tell application \"Finder\" to empty trash'```
+
 
 
 <br><br>
