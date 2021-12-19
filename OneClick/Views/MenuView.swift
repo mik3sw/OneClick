@@ -17,6 +17,7 @@ struct MenuView: View {
     @State var selected4: Bool = false
     @State var selected5: Bool = false
     @State var selected6: Bool = false
+    @State var selected7: Bool = false
     @State var icn: String = "sun.max.fill"
     @State var eye: String = "eye.slash.fill"
     @State var battery: String = "battery.25"
@@ -278,6 +279,54 @@ struct MenuView: View {
             }
             
             
+            
+            
+            
+            Group{
+                Divider()
+                    .padding(.horizontal, 10.0)
+                    .frame(width: 300)
+                
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "text.and.command.macwindow")
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+                        
+                        Text("Privacy mode")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 200, alignment: .leading)
+                            
+                        
+                        Toggle("", isOn: $selected7)
+                            .toggleStyle(.switch)
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                            .onChange(of: selected7) { value in
+                                //perform your action here...
+                                if(value){
+                                    selected1 = true
+                                    selected6 = true
+                                    
+                                    
+                                    
+                                }else{
+                                    selected1 = false
+                                    selected6 = false
+                                    
+                                }
+                            }
+                }
+                
+                Text("Hide desktop and dock")
+                    .font(Font.system(size: 12.0))
+                    .fontWeight(.light)
+                    .padding(.leading, 15.0)
+                    .padding(.top, 5.0)
+                    .padding(.bottom, 15.0)
+            }
             
             
             
