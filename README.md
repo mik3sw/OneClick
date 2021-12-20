@@ -12,6 +12,8 @@ It only emulates terminal commands from a GUI
 * Intel app
 * Apple Silicon app
 
+### [Downloads](https://github.com/mik3sw/OneClick/releases)
+
 ## Functions v 1.2 pre-release
 
 ### Hide/Show desktop
