@@ -1,5 +1,9 @@
 # OneClick
 
+[![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg)]()
+![](https://img.shields.io/badge/UI-SwiftUI-red)
+![](https://img.shields.io/badge/Platform-Monterey-purple)
+
 <div align="center">
   <img src="128x128logo.png">
   </div>
@@ -14,7 +18,7 @@ It only emulates terminal commands from a GUI
 * Intel app
 * Apple Silicon app
 
-### [Downloads](https://github.com/mik3sw/OneClick/releases)
+### [Downloads](https://github.com/mik3sw/OneClick/releases) 
 
 ## Functions v 1.4 stable
 
