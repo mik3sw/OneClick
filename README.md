@@ -5,6 +5,8 @@
   </div>
 <br><br>
 
+![](desktop.png)
+
 This simple menubar app can give you quick access to some macOS functions.
 It only emulates terminal commands from a GUI
 
@@ -14,7 +16,7 @@ It only emulates terminal commands from a GUI
 
 ### [Downloads](https://github.com/mik3sw/OneClick/releases)
 
-## Functions v 1.2 pre-release
+## Functions v 1.4 stable
 
 ### Hide/Show desktop
 Commands:
@@ -60,6 +62,16 @@ Commands:
 Command:
 
 * ```osascript -e 'tell application \"Finder\" to empty trash'```
+
+### Clear memory
+Command:
+
+* ```osascript -e 'do shell script \"purge\" with administrator privileges'```
+
+### Take screenshot
+Command:
+
+* ```screencapture -T 3 -t png -P Desktop/screenshot.png```
 
 
 

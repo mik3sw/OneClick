@@ -28,3 +28,5 @@ let setAutohideDockOff = "osascript -e 'tell application \"System Events\" to se
 
 
 let emptyTrash = "osascript -e 'tell application \"Finder\" to empty trash'"
+let purgeMemory = "osascript -e 'do shell script \"purge\" with administrator privileges'"
+let screenshot = "screencapture -T 3 -t png -P Desktop/screenshot.png"

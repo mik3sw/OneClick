@@ -340,7 +340,6 @@ struct MenuView: View {
                 HStack(spacing: 0){
                     
                     Image(systemName: "trash")
-                        .padding(.bottom, 15.0)
                         .padding(.top, 15.0)
                         .padding(.leading, 15.0)
                         .frame(width: 40, alignment: .leading)
@@ -348,7 +347,6 @@ struct MenuView: View {
                         
                         Text("Empty Trash")
                             .fontWeight(.medium)
-                            .padding(.bottom, 15.0)
                             .padding(.top, 15.0)
                             .frame(width: 200, alignment: .leading)
                             
@@ -359,9 +357,7 @@ struct MenuView: View {
                         Text("Clear")
                     }
                             .frame(alignment: .leading)
-                            .padding(.bottom, 15.0)
                             .padding(.top, 15.0)
-                            .cornerRadius(25)
                             
                             
                             
@@ -369,13 +365,67 @@ struct MenuView: View {
                 
             }
             
+            Group{
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "memorychip")
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+//                      .renderingMode(.original)
+                        
+                        Text("Memory cache")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 200, alignment: .leading)
+                            
+                        
+                    Button(action: {
+                        comando(arg: purgeMemory)
+                    }){
+                        Text("Clear")
+                    }
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                }
+            }
             
-            Divider()
-                .padding(.horizontal, 10.0)
-                .frame(width: 300)
+            Group{
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "photo")
+                        .padding(.bottom, 15.0)
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+//                      .renderingMode(.original)
+                        
+                        Text("Screenshot (3s)")
+                            .fontWeight(.medium)
+                            .padding(.bottom, 15.0)
+                            .padding(.top, 15.0)
+                            .frame(width: 200, alignment: .leading)
+                            
+                        
+                    Button(action: {
+                        comando(arg: screenshot)
+                    }){
+                        Text("Take")
+                    }
+                            .frame(alignment: .leading)
+                            .padding(.bottom, 15.0)
+                            .padding(.top, 15.0)
+                }
+                
+                Divider()
+                    .padding(.horizontal, 10.0)
+                    .frame(width: 300)
+            }
+            
+            
             
             HStack{
-                Link("\(Image(systemName: "link")) GitHub", destination: URL(string: "https://www.github.com")!)
+                Link("\(Image(systemName: "link")) GitHub", destination: URL(string: "https://github.com/mik3sw/OneClick")!)
                     .buttonStyle(LinkButtonStyle())
                     .padding(.leading, 15.0)
                     .padding(.top, 15.0)
