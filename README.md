@@ -1,8 +1,9 @@
 # OneClick
 
-[![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg)]()
-![](https://img.shields.io/badge/UI-SwiftUI-red)
-![](https://img.shields.io/badge/Platform-Monterey-purple)
+![](https://forthebadge.com/images/badges/made-with-swift.svg)
+![](https://forthebadge.com/images/badges/built-with-swag.svg)
+![](https://forthebadge.com/images/badges/powered-by-black-magic.svg)
+![](https://forthebadge.com/images/badges/open-source.svg)
 
 <div align="center">
   <img src="128x128logo.png">
@@ -19,6 +20,7 @@ It only emulates terminal commands from a GUI
 * Apple Silicon app
 
 ### [Downloads](https://github.com/mik3sw/OneClick/releases) 
+[![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg)]() 
 
 ## Functions v 1.4 stable
 
