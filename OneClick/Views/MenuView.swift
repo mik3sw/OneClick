@@ -162,7 +162,6 @@ struct MenuView: View {
                 }
                 
                 
-            
                 HStack(
                     spacing: 0){
                         
