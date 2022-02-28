@@ -1,4 +1,9 @@
-# OneClick
+# 🚀 OneClick
+
+![](https://forthebadge.com/images/badges/made-with-swift.svg)
+![](https://forthebadge.com/images/badges/built-with-swag.svg)
+![](https://forthebadge.com/images/badges/powered-by-black-magic.svg)
+![](https://forthebadge.com/images/badges/open-source.svg)
 
 <div align="center">
   <img src="128x128logo.png">
@@ -14,9 +19,10 @@ It only emulates terminal commands from a GUI
 * Intel app
 * Apple Silicon app
 
-### [Downloads](https://github.com/mik3sw/OneClick/releases)
+## 💾 [Downloads](https://github.com/mik3sw/OneClick/releases) 
+[![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg?style=for-the-badge&logo=github&color=blueviolet)]() 
 
-## Functions v 1.4 stable
+## 🖥 Functions v 1.4 stable
 
 ### Hide/Show desktop
 Commands:
