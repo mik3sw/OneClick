@@ -17,6 +17,41 @@ func comando(arg: String) -> Void {
     task.launch()
 }
 
+func comandoOut(arg: String) -> String {
+    let task = Process()
+    task.launchPath = "/bin/zsh"
+    task.arguments = ["-c", arg]
+    let pipe = Pipe()
+    task.standardOutput = pipe
+    task.launch()
+    
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output = String(data: data, encoding: String.Encoding.utf8)
+    task.waitUntilExit()
+    return output!
+}
+
+
+func whichBG() -> String {
+    var bg = ""
+    if (comandoOut(arg: darkModeStatus)).contains("true") {
+        bg = getDarkBG()
+    } else {
+        bg = getLightBG()
+    }
+    
+    return bg
+}
+
+
+func getDarkBG() -> String {
+    return darkBG
+}
+
+func getLightBG() -> String {
+    return lightBG
+}
+
 extension String {
     func runAppleScript(isShellCMD:Bool = false) -> (Bool, Any) {
         var finalCommand = self

@@ -9,7 +9,19 @@
 import Cocoa
 import SwiftUI
 
-@NSApplicationMain
+@main
+struct MyApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    var body: some Scene {
+        Settings {
+            SettingsView()
+        }
+    }
+}
+
+
+
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
     var popover = NSPopover.init()
     var statusBar: StatusBarController?
@@ -18,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = MenuView()
         popover.contentViewController = MainViewController()
         popover.contentSize = NSSize(width: 360, height: 800)
+//        popover?.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
         popover.contentViewController?.view = NSHostingView(rootView: contentView)
         statusBar = StatusBarController.init(popover)
     }
