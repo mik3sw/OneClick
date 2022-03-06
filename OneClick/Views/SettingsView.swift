@@ -14,6 +14,19 @@ var lightBG = ""
 var bgPath = ""
 
 
+var showOneG = true
+var showTwoG = true
+var showThreeG = true
+var showFourG = true
+var showFiveG = true
+var showSixG = true
+var showSevenG = true
+var showEightG = true
+var showNineG = true
+var showTenG = true
+var showElevenG = true
+
+
 struct GeneralSettingsView: View {
     @AppStorage("showPreview") private var showPreview = true
     @AppStorage("fontSize") private var fontSize = 12.0
@@ -32,6 +45,7 @@ struct GeneralSettingsView: View {
     
     @State var selectedLight: BGLightE = .bg_default
     @State var selectedDark: BGDarkE = .bg_default
+    
     
 
     var body: some View {
@@ -84,7 +98,7 @@ struct GeneralSettingsView: View {
                 }.onChange(of: selectedLight) { tag in
                     lightBG = selectedLight.rawValue
                     
-                }
+                }.frame(width: 400)
                 
                 
                 Picker("Dark Theme", selection: $selectedDark) {
@@ -97,7 +111,7 @@ struct GeneralSettingsView: View {
                 }.onChange(of: selectedDark) { tag in
                     darkBG = selectedDark.rawValue
                     
-                }
+                }.frame(width: 400)
                 
                 Text("")
                 Text("")
@@ -142,17 +156,306 @@ struct GeneralSettingsView: View {
 struct AdvancedSettingsView: View {
     @AppStorage("showPreview") private var showPreview = true
     @AppStorage("fontSize") private var fontSize = 15.0
+    
+    @State var showOne: Bool = showOneG
+    @State var showTwo: Bool = showTwoG
+    @State var showThree: Bool = showThreeG
+    @State var showFour: Bool = showFourG
+    @State var showFive: Bool = showFiveG
+    @State var showSix: Bool = showSixG
+    @State var showSeven: Bool = showSevenG
+    @State var showEight: Bool = showEightG
+    @State var showNine: Bool = showNineG
+    @State var showTen: Bool = showTenG
+    @State var showEleven: Bool = showElevenG
+    
+    
+    
 
     var body: some View {
         ZStack{
-            HStack{
-                Text("Work in progress!")
-                Image(systemName: "wand.and.stars")
+            VStack{
+                
+                Text("Choose which toggle will be displayed, then hit refresh button \(Image(systemName: "goforward"))")
+                
+                Divider()
+                    .padding(.horizontal, 10.0)
+                    .frame(width: 500)
+                    
+                HStack{
+                    
+                    VStack{
+                        
+                        HStack(spacing: 0){
+                            Image(systemName: "menubar.dock.rectangle")
+                                .padding(.top, 15.0)
+                                .padding(.leading, 15.0)
+                                .frame(width: 40, alignment: .leading)
+                                
+                            Text("Desktop files")
+                                .fontWeight(.medium)
+                                .padding(.top, 15.0)
+                                .frame(width: 150, alignment: .leading)
+                            
+                            Toggle("", isOn: $showOne)
+                                .toggleStyle(.switch)
+                                .frame(alignment: .leading)
+                                .padding(.top, 15.0)
+                                .onChange(of: showOne) { value in
+                                    showOneG = !showOneG
+                                }
+                        }
+                        
+                        HStack(spacing: 0){
+                                
+                                Image(systemName: "dock.rectangle")
+                                    .padding(.top, 15.0)
+                                    .padding(.leading, 15.0)
+                                    .frame(width: 40, alignment: .leading)
+                                
+                                Text("Hide/show Dock")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                
+                                
+                                
+                                Toggle("", isOn: $showThree)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showThree) { value in
+                                        showThreeG = !showThreeG
+                                    }
+                                }
+                        
+                        HStack(spacing: 0){
+                                
+                                Image(systemName: "battery.50")
+                                    .padding(.top, 15.0)
+                                    .padding(.leading, 15.0)
+                                    .frame(width: 40, alignment: .leading)
+                                
+                                Text("Battery Saving")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                    
+                                
+                                Toggle("", isOn: $showFive)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showFive) { value in
+                                        showFiveG = !showFiveG
+                                    }
+                                }
+                        
+                        HStack(spacing: 0){
+                            
+                            Image(systemName: "eye")
+                                .padding(.top, 15.0)
+                                .padding(.leading, 15.0)
+                                .frame(width: 40, alignment: .leading)
+                                
+                                Text("Caffeinate")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                    
+                                
+                                Toggle("", isOn: $showSeven)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showSeven) { value in
+                                        //perform your action here...
+                                        showSevenG = !showSevenG
+                                    }
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    VStack{
+                        HStack(spacing: 0){
+            //                    folder.fill
+                                Image(systemName: "folder.fill")
+                                    .padding(.top, 15.0)
+                                    .padding(.leading, 15.0)
+                                    .frame(width: 40, alignment: .leading)
+                                Text("Hidden Files")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                    
+                                
+                                Toggle("", isOn: $showTwo)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showTwo) { value in
+                                        showTwoG = !showTwoG
+                                    }
+                        }
+                        
+                        HStack(spacing: 0){
+                                
+                                Image(systemName: "menubar.rectangle")
+                                    .padding(.top, 15.0)
+                                    .padding(.leading, 15.0)
+                                    .frame(width: 40, alignment: .leading)
+                                
+                                Text("Hide/show MenuBar")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                
+                                
+                                
+                                Toggle("", isOn: $showFour)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showFour) { value in
+                                        showFourG = !showFourG
+                                    }
+                                }
+                        
+                        HStack(spacing: 0){
+                                
+                                Image(systemName: "moon.stars")
+                                    .padding(.top, 15.0)
+                                    .padding(.leading, 15.0)
+                                    .frame(width: 40, alignment: .leading)
+                                
+                                Text("Dark Mode")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                    
+                                
+                                Toggle("", isOn: $showSix)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showSix) { value in
+                                        showSixG = !showSixG
+                                    }
+                                }
+                        
+                        HStack(spacing: 0){
+                            
+                            Image(systemName: "text.and.command.macwindow")
+                                .padding(.top, 15.0)
+                                .padding(.leading, 15.0)
+                                .frame(width: 40, alignment: .leading)
+                                
+                                Text("Privacy mode")
+                                    .fontWeight(.medium)
+                                    .padding(.top, 15.0)
+                                    .frame(width: 150, alignment: .leading)
+                                    
+                                
+                                Toggle("", isOn: $showEight)
+                                    .toggleStyle(.switch)
+                                    .frame(alignment: .leading)
+                                    .padding(.top, 15.0)
+                                    .onChange(of: showEight) { value in
+                                        //perform your action here...
+                                        showEightG = !showEightG
+                                    }
+                        }
+                        
+                        
+                    }
+                }
+                
+                Divider()
+                    .padding(.horizontal, 10.0)
+                    .frame(width: 500)
+                    
+                
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "trash")
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+                        
+                        Text("Empty Trash")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 395, alignment: .leading)
+                            
+                        
+                        Toggle("", isOn: $showNine)
+                            .toggleStyle(.switch)
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                            .onChange(of: showNine) { value in
+                                //perform your action here...
+                                showNineG = !showNineG
+                            }
+                }
+                
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "memorychip")
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+                        
+                        Text("Memory Cache")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 395, alignment: .leading)
+                            
+                        
+                        Toggle("", isOn: $showTen)
+                            .toggleStyle(.switch)
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                            .onChange(of: showTen) { value in
+                                //perform your action here...
+                                showTenG = !showTenG
+                            }
+                }
+                
+                HStack(spacing: 0){
+                    
+                    Image(systemName: "photo")
+                        .padding(.top, 15.0)
+                        .padding(.leading, 15.0)
+                        .frame(width: 40, alignment: .leading)
+                        
+                        Text("Screenshot")
+                            .fontWeight(.medium)
+                            .padding(.top, 15.0)
+                            .frame(width: 395, alignment: .leading)
+                            
+                        
+                        Toggle("", isOn: $showEleven)
+                            .toggleStyle(.switch)
+                            .frame(alignment: .leading)
+                            .padding(.top, 15.0)
+                            .onChange(of: showEleven) { value in
+                                //perform your action here...
+                                showElevenG = !showElevenG
+                            }
+                }
+                
+                
+                
             }
+            
+            
             
         }
         
     }
+    
 }
 
 
@@ -160,13 +463,48 @@ struct AdvancedSettingsView: View {
 struct AboutSettingsView: View {
     @AppStorage("showPreview") private var showPreview = true
     @AppStorage("fontSize") private var fontSize = 15.0
-
+    
+    struct Info: Identifiable {
+        let infoName: String
+        let aboutName: String
+        let id = UUID()
+    }
+    @State private var info = [
+        Info(infoName: "Dev", aboutName: "Chavez"),
+        Info(infoName: "Mei", aboutName: "Chen"),
+        Info(infoName: "Tom", aboutName: "Clark"),
+        Info(infoName: "Gita", aboutName: "Kumar"),
+    ]
+    
+    @State private var sortOrder = [KeyPathComparator(\Info.infoName)]
+    
     var body: some View {
         ZStack{
-            HStack{
-                Text("About")
-                Image(systemName: "wand.and.stars")
+            VStack{
+                HStack{
+                    Text("About").fontWeight(.medium)
+                }
+                Text("")
+                Text("")
+                Text("Thanks for downloading this app ❤️")
+                Text("-mik3sw")
+                
+//                List{
+//                    Text("Dev:                      Michele Marcucci")
+//                    Text("Status:                   Beta")
+//                }
+                
+//                Table(info, sortOrder: $sortOrder) {
+//                        TableColumn("Given Name", value: \.infoName)
+//                        TableColumn("Family Name", value: \.aboutName)
+//                    }
+                
+                Link("GitHub", destination: URL(string: "https://github.com/mik3sw/OneClick")!)
+                    .buttonStyle(LinkButtonStyle())
+                    .padding(.leading, 15.0)
+                    .padding(.top, 15.0)
             }
+            
             
         }
         
@@ -209,11 +547,11 @@ struct SettingsView: View {
                 }
                 .tag(Tabs.advanced)
             
-            ShortcutSettingsView()
-                .tabItem {
-                    Label("Shortcut", systemImage: "command")
-                }
-                .tag(Tabs.about)
+//            ShortcutSettingsView()
+//                .tabItem {
+//                    Label("Shortcut", systemImage: "command")
+//                }
+//                .tag(Tabs.about)
             
             AboutSettingsView()
                 .tabItem {
@@ -222,7 +560,7 @@ struct SettingsView: View {
                 .tag(Tabs.about)
         }
         .padding(20)
-        .frame(width: 500, height: 250)
+        
     }
 }
 
