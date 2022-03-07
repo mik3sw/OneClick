@@ -34,12 +34,12 @@ struct GeneralSettingsView: View {
     
     
     enum BGLightE: String, CaseIterable, Identifiable {
-        case bg_default, bg1_light, bg2_light, bg3_light, bg4_light
+        case bg_default, bg1_light, bg2_light, bg3_light, bg4_light, bg5_light, bg6_light
         var id: Self { self }
     }
     
     enum BGDarkE: String, CaseIterable, Identifiable {
-        case bg_default, bg1_dark, bg2_dark, bg3_dark, bg4_dark
+        case bg_default, bg1_dark, bg2_dark, bg3_dark, bg4_dark, bg5_dark, bg6_dark
         var id: Self { self }
     }
     
@@ -93,8 +93,10 @@ struct GeneralSettingsView: View {
                     Text("Default").tag(BGLightE.bg_default)
                     Text("Mountain").tag(BGLightE.bg1_light)
                     Text("Yellow").tag(BGLightE.bg2_light)
-                    Text("Sunrise").tag(BGLightE.bg3_light)
-                    Text("Sunset").tag(BGLightE.bg4_light)
+                    Text("Sky").tag(BGLightE.bg3_light)
+                    Text("Sea").tag(BGLightE.bg4_light)
+                    Text("Green").tag(BGLightE.bg5_light)
+                    Text("Pink").tag(BGLightE.bg6_light)
                 }.onChange(of: selectedLight) { tag in
                     lightBG = selectedLight.rawValue
                     
@@ -107,6 +109,8 @@ struct GeneralSettingsView: View {
                     Text("Abstract 2").tag(BGDarkE.bg2_dark)
                     Text("Abstract 3").tag(BGDarkE.bg4_dark)
                     Text("Night").tag(BGDarkE.bg3_dark)
+                    Text("Forest").tag(BGDarkE.bg5_dark)
+                    Text("City").tag(BGDarkE.bg6_dark)
                     
                 }.onChange(of: selectedDark) { tag in
                     darkBG = selectedDark.rawValue
