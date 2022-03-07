@@ -1,8 +1,6 @@
-# 🚀 OneClick
+# OneClick
 
 ![](https://forthebadge.com/images/badges/made-with-swift.svg)
-![](https://forthebadge.com/images/badges/built-with-swag.svg)
-![](https://forthebadge.com/images/badges/powered-by-black-magic.svg)
 ![](https://forthebadge.com/images/badges/open-source.svg)
 
 <div align="center">
@@ -10,7 +8,7 @@
   </div>
 <br><br>
 
-![](desktop.png)
+![](imgs/im1.png)
 
 This simple menubar app can give you quick access to some macOS functions.
 It only emulates terminal commands from a GUI
@@ -22,7 +20,10 @@ It only emulates terminal commands from a GUI
 ## 💾 [Downloads](https://github.com/mik3sw/OneClick/releases) 
 [![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg?style=for-the-badge&logo=github&color=blueviolet)]() 
 
-## 🖥 Functions v 1.4 stable
+
+<details>
+<summary>Show toggles</summary>
+<br>
 
 ### Hide/Show desktop
 Commands:
@@ -79,12 +80,20 @@ Command:
 
 * ```screencapture -T 3 -t png -P Desktop/screenshot.png```
 
+</details>
 
 
-<br><br>
 
-<div align="center">
-  <img src="screen.png">
-</div>
+## ⚙️ Settings
 
+![](imgs/General.png)
+![](imgs/Edit.png)
+
+
+## 🎨 Themes
+
+|   |   |   |   |   |   |
+|---|---|---|---|---|---|
+| ![](imgs/lightThemes/1.png)  |  ![](imgs/lightThemes/2.png) |  ![](imgs/lightThemes/3.png) | ![](imgs/lightThemes/4.png)  | ![](imgs/lightThemes/5.png)  | ![](imgs/lightThemes/6.png) |
+| ![](imgs/darkThemes/1.png)  | ![](imgs/darkThemes/2.png)  |  ![](imgs/darkThemes/3.png) | ![](imgs/darkThemes/4.png)  | ![](imgs/darkThemes/5.png)  |  ![](imgs/darkThemes/6.png) |
 
