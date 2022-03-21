@@ -19,10 +19,14 @@ OneClick can give you quick access to some macOS functions from MenuBar!
 ## 💾 Downloads 
 [![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg?style=for-the-badge&logo=github&color=blueviolet)]() 
 
+**Support me with a star!** ⭐️ 
+
 * [Releases](https://github.com/mik3sw/OneClick/releases)
 * HomeBrew soon ...
 
 > OneClick 2.0 is currently in beta i need to fix some errors and bugs
+
+
 
 <details>
 <summary>Show functions</summary>
@@ -100,9 +104,6 @@ From settings you can select Themes (dark and light), "launch at login" function
 > This is a beta feature, you can only add one custom toggle 
 
 ![](imgs/customTogglesExample.png)
-
-
-
 
 
 ## 🎨 Themes
