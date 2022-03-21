@@ -45,11 +45,13 @@ func whichBG() -> String {
 
 
 func getDarkBG() -> String {
+    //return UserDefaults.standard.string(forKey: "dark") ?? ""
     return darkBG
 }
 
 func getLightBG() -> String {
     return lightBG
+    //return UserDefaults.standard.string(forKey: "light") ?? ""
 }
 
 extension String {

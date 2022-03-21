@@ -12,6 +12,7 @@ import SwiftUI
 @main
 struct MyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         Settings {
             SettingsView()
@@ -23,6 +24,7 @@ struct MyApp: App {
 
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
     var popover = NSPopover.init()
     var statusBar: StatusBarController?
 

@@ -14,7 +14,7 @@ var lightBG = ""
 var bgPath = ""
 
 
-var showOneG = true
+var showOneG : Bool = true
 var showTwoG = true
 var showThreeG = true
 var showFourG = true
@@ -45,6 +45,9 @@ struct GeneralSettingsView: View {
     
     @State var selectedLight: BGLightE = .bg_default
     @State var selectedDark: BGDarkE = .bg_default
+    
+    @AppStorage("light") var lightbackground : String = ""
+    @AppStorage("dark") var darkbackground : String = ""
     
     
 
@@ -99,6 +102,7 @@ struct GeneralSettingsView: View {
                     Text("Pink").tag(BGLightE.bg6_light)
                 }.onChange(of: selectedLight) { tag in
                     lightBG = selectedLight.rawValue
+                    //UserDefaults.standard.set(selectedLight.rawValue, forKey: "light")
                     
                 }.frame(width: 400)
                 
@@ -114,6 +118,7 @@ struct GeneralSettingsView: View {
                     
                 }.onChange(of: selectedDark) { tag in
                     darkBG = selectedDark.rawValue
+                    //UserDefaults.standard.set(selectedDark.rawValue, forKey: "dark")
                     
                 }.frame(width: 400)
                 
@@ -160,18 +165,19 @@ struct GeneralSettingsView: View {
 struct AdvancedSettingsView: View {
     @AppStorage("showPreview") private var showPreview = true
     @AppStorage("fontSize") private var fontSize = 15.0
+    //@State var showOne: Bool = showOneG
     
-    @State var showOne: Bool = showOneG
-    @State var showTwo: Bool = showTwoG
-    @State var showThree: Bool = showThreeG
-    @State var showFour: Bool = showFourG
-    @State var showFive: Bool = showFiveG
-    @State var showSix: Bool = showSixG
-    @State var showSeven: Bool = showSevenG
-    @State var showEight: Bool = showEightG
-    @State var showNine: Bool = showNineG
-    @State var showTen: Bool = showTenG
-    @State var showEleven: Bool = showElevenG
+    @State var showOne: Bool = !UserDefaults.standard.bool(forKey: "OneT")
+    @State var showTwo: Bool = !UserDefaults.standard.bool(forKey: "TwoT")
+    @State var showThree: Bool = !UserDefaults.standard.bool(forKey: "ThreeT")
+    @State var showFour: Bool = !UserDefaults.standard.bool(forKey: "FourT")
+    @State var showFive: Bool = !UserDefaults.standard.bool(forKey: "FiveT")
+    @State var showSix: Bool = !UserDefaults.standard.bool(forKey: "SixT")
+    @State var showSeven: Bool = !UserDefaults.standard.bool(forKey: "SevenT")
+    @State var showEight: Bool = !UserDefaults.standard.bool(forKey: "EightT")
+    @State var showNine: Bool = !UserDefaults.standard.bool(forKey: "NineT")
+    @State var showTen: Bool = !UserDefaults.standard.bool(forKey: "TenT")
+    @State var showEleven: Bool = !UserDefaults.standard.bool(forKey: "ElevenT")
     
     
     
@@ -206,7 +212,9 @@ struct AdvancedSettingsView: View {
                                 .frame(alignment: .leading)
                                 .padding(.top, 15.0)
                                 .onChange(of: showOne) { value in
-                                    showOneG = !showOneG
+                                    //showOneG = showOne
+                                    showOne = !showOne
+                                    UserDefaults.standard.set(!showOne, forKey: "OneT")
                                 }
                         }
                         
@@ -229,7 +237,8 @@ struct AdvancedSettingsView: View {
                                     .frame(alignment: .leading)
                                     .padding(.top, 15.0)
                                     .onChange(of: showThree) { value in
-                                        showThreeG = !showThreeG
+                                        showThree = !showThree
+                                        UserDefaults.standard.set(!showThree, forKey: "ThreeT")
                                     }
                                 }
                         
@@ -251,7 +260,8 @@ struct AdvancedSettingsView: View {
                                     .frame(alignment: .leading)
                                     .padding(.top, 15.0)
                                     .onChange(of: showFive) { value in
-                                        showFiveG = !showFiveG
+                                        showFive = !showFive
+                                        UserDefaults.standard.set(!showFive, forKey: "FiveT")
                                     }
                                 }
                         
@@ -274,7 +284,8 @@ struct AdvancedSettingsView: View {
                                     .padding(.top, 15.0)
                                     .onChange(of: showSeven) { value in
                                         //perform your action here...
-                                        showSevenG = !showSevenG
+                                        showSeven = !showSeven
+                                        UserDefaults.standard.set(!showSeven, forKey: "SevenT")
                                     }
                         }
                         
@@ -300,7 +311,8 @@ struct AdvancedSettingsView: View {
                                     .frame(alignment: .leading)
                                     .padding(.top, 15.0)
                                     .onChange(of: showTwo) { value in
-                                        showTwoG = !showTwoG
+                                        showTwo = !showTwo
+                                        UserDefaults.standard.set(!showTwo, forKey: "TwoT")
                                     }
                         }
                         
@@ -323,7 +335,8 @@ struct AdvancedSettingsView: View {
                                     .frame(alignment: .leading)
                                     .padding(.top, 15.0)
                                     .onChange(of: showFour) { value in
-                                        showFourG = !showFourG
+                                        showFour = !showFour
+                                        UserDefaults.standard.set(!showFour, forKey: "FourT")
                                     }
                                 }
                         
@@ -345,7 +358,8 @@ struct AdvancedSettingsView: View {
                                     .frame(alignment: .leading)
                                     .padding(.top, 15.0)
                                     .onChange(of: showSix) { value in
-                                        showSixG = !showSixG
+                                        showSix = !showSix
+                                        UserDefaults.standard.set(!showSix, forKey: "SixT")
                                     }
                                 }
                         
@@ -368,7 +382,8 @@ struct AdvancedSettingsView: View {
                                     .padding(.top, 15.0)
                                     .onChange(of: showEight) { value in
                                         //perform your action here...
-                                        showEightG = !showEightG
+                                        showEight = !showEight
+                                        UserDefaults.standard.set(!showEight, forKey: "EightT")
                                     }
                         }
                         
@@ -400,7 +415,8 @@ struct AdvancedSettingsView: View {
                             .padding(.top, 15.0)
                             .onChange(of: showNine) { value in
                                 //perform your action here...
-                                showNineG = !showNineG
+                                showNine = !showNine
+                                UserDefaults.standard.set(!showNine, forKey: "NineT")
                             }
                 }
                 
@@ -423,7 +439,8 @@ struct AdvancedSettingsView: View {
                             .padding(.top, 15.0)
                             .onChange(of: showTen) { value in
                                 //perform your action here...
-                                showTenG = !showTenG
+                                showTen = !showTen
+                                UserDefaults.standard.set(!showTen, forKey: "TenT")
                             }
                 }
                 
@@ -446,7 +463,8 @@ struct AdvancedSettingsView: View {
                             .padding(.top, 15.0)
                             .onChange(of: showEleven) { value in
                                 //perform your action here...
-                                showElevenG = !showElevenG
+                                showEleven = !showEleven
+                                UserDefaults.standard.set(!showEleven, forKey: "ElevenT")
                             }
                 }
                 
@@ -505,12 +523,11 @@ struct AboutSettingsView: View {
                 
                 Link("GitHub", destination: URL(string: "https://github.com/mik3sw/OneClick")!)
                     .buttonStyle(LinkButtonStyle())
-                    .padding(.leading, 15.0)
                     .padding(.top, 15.0)
             }
             
             
-        }
+        }.frame(width: 500)
         
     }
 }
@@ -528,6 +545,37 @@ struct ShortcutSettingsView: View {
             // https://github.com/sindresorhus/KeyboardShortcuts
             
         }
+        
+    }
+}
+
+struct CustomToggleView: View {
+    @AppStorage("showPreview") private var showPreview = true
+    @AppStorage("fontSize") private var fontSize = 15.0
+    @State var enableCustom : Bool = false
+    
+    var body: some View{
+        ZStack{
+            VStack(alignment: .leading, spacing: 0){
+                HStack(spacing: 0){
+                    Toggle("Enable custom toggles", isOn: $enableCustom)
+                        .onChange(of: enableCustom) { value in
+                            if(value){
+                            
+                            } else{
+                            
+                            }
+                        }
+                        .padding(.leading, 15.0)
+                        .padding(.top, 15.0)
+                        .padding(.bottom, 10.0)
+                        .frame(width: 500, alignment: .leading)
+                }
+                
+            }
+            
+            
+        }.frame(width: 500)
         
     }
 }
@@ -556,6 +604,11 @@ struct SettingsView: View {
 //                    Label("Shortcut", systemImage: "command")
 //                }
 //                .tag(Tabs.about)
+            
+            CustomToggleView()
+                .tabItem{
+                    Label("Custom toggles", systemImage: "paintbrush.pointed")
+                }
             
             AboutSettingsView()
                 .tabItem {

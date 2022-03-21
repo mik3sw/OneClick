@@ -14,6 +14,7 @@
 		A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624B237B003900A2BA73 /* StatusBarController.swift */; };
 		A70B6250237B022700A2BA73 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624F237B022700A2BA73 /* MainViewController.swift */; };
 		A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B6251237B078200A2BA73 /* EventMonitor.swift */; };
+		B71F5CDC27E8C04C00CA8ECE /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */; };
 		B76B2E3F276F775E008E6460 /* ShellCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B2E3E276F775E008E6460 /* ShellCommands.swift */; };
 		B76F381F27D2AF1900812227 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76F381E27D2AF1900812227 /* SettingsView.swift */; };
 		B7D22575276A863A003286EC /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D22574276A863A003286EC /* MenuView.swift */; };
@@ -32,6 +33,7 @@
 		A70B624B237B003900A2BA73 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		A70B624F237B022700A2BA73 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A70B6251237B078200A2BA73 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		B757C998276CE0EE004BC3F4 /* OneClick-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OneClick-Bridging-Header.h"; sourceTree = "<group>"; };
 		B76B2E3E276F775E008E6460 /* ShellCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellCommands.swift; sourceTree = "<group>"; };
 		B76F381E27D2AF1900812227 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				B7D22574276A863A003286EC /* MenuView.swift */,
 				B76F381E27D2AF1900812227 /* SettingsView.swift */,
+				B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */,
 				A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */,
 				A70B6234237AF87000A2BA73 /* AppDelegate.swift in Sources */,
+				B71F5CDC27E8C04C00CA8ECE /* ToggleView.swift in Sources */,
 				A70B6250237B022700A2BA73 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,7 +375,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"OneClick/Preview Content\"";
 				DEVELOPMENT_TEAM = 9P9AFAVH5T;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -382,7 +386,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mike.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,7 +405,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"OneClick/Preview Content\"";
 				DEVELOPMENT_TEAM = 9P9AFAVH5T;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -412,7 +416,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mike.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

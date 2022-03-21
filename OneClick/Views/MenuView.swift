@@ -20,6 +20,7 @@ struct MenuView: View {
     @State var bg = whichBG()
     @State var refreshView: Bool = false
     
+    // toggle status based on system settings
     @State var selected1: Bool = (comandoOut(arg: statusDesktop)).contains("false")
     @State var selected2: Bool = (comandoOut(arg: statusFiles)).contains("1")
     @State var selected3: Bool = false
@@ -28,11 +29,24 @@ struct MenuView: View {
     @State var selected6: Bool = (comandoOut(arg: statusAutohideDock)).contains("true")
     @State var selected7: Bool = false
     @State var selected8: Bool = (comandoOut(arg: statusAutohideMenuBar)).contains("true")
+    
     @State var icn: String = "sun.max.fill"
-    @State var eye: String = "eye.slash.fill"
-    @State var battery: String = "battery.25"
+    //@State var eye: String = "eye.slash.fill"
+    //@State var battery: String = "battery.25"
     
+    @AppStorage("OneT") var showOne: Bool = true
+    @AppStorage("TwoT") var showTwo: Bool = true
+    @AppStorage("ThreeT") var showThree: Bool = true
+    @AppStorage("FourT") var showFour: Bool = true
+    @AppStorage("FiveT") var showFive: Bool = true
+    @AppStorage("SixT") var showSix: Bool = true
+    @AppStorage("SevenT") var showSeven: Bool = true
+    @AppStorage("EightT") var showEight: Bool = true
+    @AppStorage("NineT") var showNine: Bool = true
+    @AppStorage("TenT") var showTen: Bool = true
+    @AppStorage("ElevenT") var showEleven: Bool = true
     
+    //@AppStorage("FiveT") var showFive: Bool = true
     
     
     var body: some View {
@@ -40,7 +54,7 @@ struct MenuView: View {
         ZStack{
             VStack( alignment: .leading, spacing: 0){
                 
-                
+                // Header
                 HStack{
                     Text("OneClick")
                         .font(Font.system(size: 15.0))
@@ -80,212 +94,33 @@ struct MenuView: View {
                     .padding(.horizontal, 10.0)
                     .frame(width: 300)
                 
-                
-                
                 Group {
-                    if showOneG {
-                        HStack(spacing: 0){
-            //                   \(Image(systemName: "sun.max.fill"))
-                                Image(systemName: "menubar.dock.rectangle")
-                                    .padding(.top, 15.0)
-                                    .padding(.leading, 15.0)
-                                    .frame(width: 40, alignment: .leading)
-                                    
-                                Text("Desktop files")
-                                    .fontWeight(.medium)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 200, alignment: .leading)
-                                    
-                                
-                                if #available(macOS 11.0, *) {
-                                    Toggle("", isOn: $selected1)
-                                        .toggleStyle(.switch)
-                                        .frame(alignment: .leading)
-                                        .padding(.top, 15.0)
-                                        .onChange(of: selected1) { value in
-                                            
-                                            if (value){
-                                                comando(arg: hideDesktop)
-                                            }
-                                            else{
-                                                comando(arg: showDesktop)
-                                            }
-                                        }
-                                } else {
-                                    // Fallback on earlier versions
-                                }
-                        }
                     
-                    Text("Hide/show files and folders in your desktop")
-                        .font(Font.system(size: 12.0))
-                        .fontWeight(.light)
-                        .padding(.leading, 15.0)
-                        .padding(.top, 5.0)
                     
+                    // ToggleViews
+                    
+                    if !UserDefaults.standard.bool(forKey: "OneT") {
+                        ToggleView("Desktop Files", "menubar.dock.rectangle", "Hide/show files and folders in your desktop", hideDesktop, showDesktop, selected1)
                     }
                     
-                    
-                    Group{
-                        if showTwoG{
-                            HStack(spacing: 0){
-                //                    folder.fill
-                                    Image(systemName: "folder.fill")
-                                        .padding(.top, 15.0)
-                                        .padding(.leading, 15.0)
-                                        .frame(width: 40, alignment: .leading)
-                                    Text("Hidden Files")
-                                        .fontWeight(.medium)
-                                        .padding(.top, 15.0)
-                                        .frame(width: 200, alignment: .leading)
-                                        
-                                    
-                                    Toggle("", isOn: $selected2)
-                                        .toggleStyle(.switch)
-                                        .frame(alignment: .leading)
-                                        .padding(.top, 15.0)
-                                        .onChange(of: selected2) { value in
-                                            
-                                            if(value){
-                                                comando(arg: showHiddenFiles)
-                                            }
-                                            else{
-                                                comando(arg: hideHiddenFiles)
-                                            }
-                                        }
-                            }
-                            
-                            Text("Hide/show hidden files and folders everywhere")
-                                .font(Font.system(size: 12.0))
-                                .fontWeight(.light)
-                                .padding(.leading, 15.0)
-                                .padding(.top, 5.0)
-                        }
-                        
-                    }
-                
-                    
-                    
-                    Group{
-                        if showThreeG{
-                            HStack(spacing: 0){
-                                    
-                                    Image(systemName: "dock.rectangle")
-                                        .padding(.top, 15.0)
-                                        .padding(.leading, 15.0)
-                                        .frame(width: 40, alignment: .leading)
-                                    
-                                    Text("Hide/show Dock")
-                                        .fontWeight(.medium)
-                                        .padding(.top, 15.0)
-                                        .frame(width: 200, alignment: .leading)
-                                    
-                                    
-                                    
-                                    Toggle("", isOn: $selected6)
-                                        .toggleStyle(.switch)
-                                        .frame(alignment: .leading)
-                                        .padding(.top, 15.0)
-                                        .onChange(of: selected6) { value in
-                                            
-                                            if(value){
-                                                comando(arg: setAutohideDockOn)
-                                                
-                                            }
-                                            else{
-                                                comando(arg: setAutohideDockOff)
-                                                
-                                            }
-                                        }
-                                    }
-                            
-                            Text("Enable/disable dock autohiding")
-                                .font(Font.system(size: 12.0))
-                                .fontWeight(.light)
-                                .padding(.leading, 15.0)
-                                .padding(.top, 5.0)
-                            
-                        }
-                        
-                        if showFourG{
-                            HStack(spacing: 0){
-                                    
-                                    Image(systemName: "menubar.rectangle")
-                                        .padding(.top, 15.0)
-                                        .padding(.leading, 15.0)
-                                        .frame(width: 40, alignment: .leading)
-                                    
-                                    Text("Hide/show MenuBar")
-                                        .fontWeight(.medium)
-                                        .padding(.top, 15.0)
-                                        .frame(width: 200, alignment: .leading)
-                                    
-                                    
-                                    
-                                    Toggle("", isOn: $selected8)
-                                        .toggleStyle(.switch)
-                                        .frame(alignment: .leading)
-                                        .padding(.top, 15.0)
-                                        .onChange(of: selected8) { value in
-                                            
-                                            if(value){
-                                                comando(arg: setAutohideMenuBarOn)
-                                                
-                                            }
-                                            else{
-                                                comando(arg: setAutohideMenuBarOff)
-                                                
-                                            }
-                                        }
-                                    }
-                            
-                            Text("Enable/disable menubar autohiding")
-                                .font(Font.system(size: 12.0))
-                                .fontWeight(.light)
-                                .padding(.leading, 15.0)
-                                .padding(.top, 5.0)
-                        }
-                        
+                    if !UserDefaults.standard.bool(forKey: "TwoT"){
+                        ToggleView("Hidden files", "folder.fill", "Hide/show hidden files and folders everywhere", showHiddenFiles, hideHiddenFiles, selected2)
                     }
                     
-                    if showFiveG{
-                        HStack(spacing: 0){
-                                
-                                Image(systemName: battery)
-                                    .padding(.top, 15.0)
-                                    .padding(.leading, 15.0)
-                                    .frame(width: 40, alignment: .leading)
-                                
-                                Text("Battery Saving")
-                                    .fontWeight(.medium)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 200, alignment: .leading)
-                                    
-                                
-                                Toggle("", isOn: $selected4)
-                                    .toggleStyle(.switch)
-                                    .frame(alignment: .leading)
-                                    .padding(.top, 15.0)
-                                    .onChange(of: selected4) { value in
-                                        
-                                        if(value){
-                                            comando(arg: batterySavingOn)
-                                            battery = "battery.75"
-                                        }
-                                        else{
-                                            comando(arg: batterySavingOff)
-                                            battery = "battery.25"
-                                        }
-                                    }
-                                }
-                        
-                        Text("Enable/disable battery saving (need root access)")
-                            .font(Font.system(size: 12.0))
-                            .fontWeight(.light)
-                            .padding(.leading, 15.0)
-                            .padding(.top, 5.0)
+                    if !UserDefaults.standard.bool(forKey: "ThreeT"){
+                        ToggleView("Hide/show Dock", "dock.rectangle", "Enable/disable dock autohiding", setAutohideDockOn, setAutohideDockOff, selected6)
                     }
                     
-                    if showSixG {
+                    if !UserDefaults.standard.bool(forKey: "FourT"){
+                        ToggleView("Hide/show MenuBar", "menubar.rectangle", "Enable/disable menubar autohiding", setAutohideMenuBarOn, setAutohideMenuBarOff, selected8)
+                    }
+                    
+                    if !UserDefaults.standard.bool(forKey: "FiveT"){
+                        ToggleViewAnimated("Battery Saving", "battery.75", "battery.25", "Enable/disable battery saving (need root access)", batterySavingOn, batterySavingOff, selected4)
+                    }
+                    
+                    if !UserDefaults.standard.bool(forKey: "SixT") {
+                        // Dark mode è particolare devo vederla più tardi
                         HStack(spacing: 0){
                                 
                                 Image(systemName: icn)
@@ -326,59 +161,15 @@ struct MenuView: View {
                     }
                     
                     
-                    if showSevenG{
-                        HStack(spacing: 0){
-                            
-                            Image(systemName: eye)
-                                .padding(.top, 15.0)
-                                .padding(.leading, 15.0)
-                                .frame(width: 40, alignment: .leading)
-                                
-                                Text("Caffeinate")
-                                    .fontWeight(.medium)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 200, alignment: .leading)
-                                    
-                                
-                                Toggle("", isOn: $selected3)
-                                    .toggleStyle(.switch)
-                                    .frame(alignment: .leading)
-                                    .padding(.top, 15.0)
-                                    .onChange(of: selected3) { value in
-                                        //perform your action here...
-                                        if(value){
-                                            
-                                            comando(arg: caffeinateOn)
-                                            eye = "eye.fill"
-                                            
-                                        }else{
-                                            comando(arg: caffeinateOff)
-                                            eye = "eye.slash.fill"
-                                        }
-                                    }
-                        }
-                        
-                        Text("Prevent Mac from going to sleep")
-                            .font(Font.system(size: 12.0))
-                            .fontWeight(.light)
-                            .padding(.leading, 15.0)
-                            .padding(.top, 5.0)
-                            
-                            
+                    if !UserDefaults.standard.bool(forKey: "SevenT"){
+                        ToggleViewAnimated("Caffeinate", "eye.fill", "eye.slash.fill", "Prevent Mac from going to sleep", caffeinateOn, caffeinateOff, selected3)
                     }
-                    
                     Text("")
-                
-                    
                 }
                 
-                
-                
-                
-                
                 Group{
-                    
-                    if showEightG {
+                    // Macro che attiva più comandi insieme, particolare non la toccherei
+                    if !UserDefaults.standard.bool(forKey: "EightT") {
                         Divider()
                             .padding(.horizontal, 10.0)
                             .frame(width: 300)
@@ -407,8 +198,6 @@ struct MenuView: View {
                                             selected6 = true
                                             selected8 = true
                                             
-                                            
-                                            
                                         }else{
                                             selected1 = false
                                             selected6 = false
@@ -428,99 +217,24 @@ struct MenuView: View {
                     
                 }
                 
-                
-                
                 Divider()
                     .padding(.horizontal, 10.0)
                     .frame(width: 300)
                 
                 
                 Group{
+                    // ButtonViews
                     
-                    if showNineG {
-                        HStack(spacing: 0){
-                            
-                            Image(systemName: "trash")
-                                .padding(.top, 15.0)
-                                .padding(.leading, 15.0)
-                                .frame(width: 40, alignment: .leading)
-        //                      .renderingMode(.original)
-                                
-                                Text("Empty Trash")
-                                    .fontWeight(.medium)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 200, alignment: .leading)
-                                    
-                                
-                            Button(action: {
-                                comando(arg: emptyTrash)
-                            }){
-                                Text("Clear")
-                            }
-                                    .frame(alignment: .leading)
-                                    .padding(.top, 15.0)
-                                    
-                        }
+                    if !UserDefaults.standard.bool(forKey: "NineT") {
+                        ButtonView("Empty Trash", "trash", emptyTrash, "Clear")
                     }
                     
-                    
-                    
-                }
-                
-                Group{
-                    if showTenG {
-                        HStack(spacing: 0){
-                            
-                            Image(systemName: "memorychip")
-                                .padding(.top, 15.0)
-                                .padding(.leading, 15.0)
-                                .frame(width: 40, alignment: .leading)
-        //                      .renderingMode(.original)
-                                
-                                Text("Memory cache")
-                                    .fontWeight(.medium)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 200, alignment: .leading)
-                                    
-                                
-                            Button(action: {
-                                comando(arg: purgeMemory)
-                            }){
-                                Text("Clear")
-                            }
-                                    .frame(alignment: .leading)
-                                    .padding(.top, 15.0)
-                        }
+                    if !UserDefaults.standard.bool(forKey: "TenT") {
+                        ButtonView("Memory cache", "memorychip", purgeMemory, "Clear")
                     }
                     
-                }
-                
-                Group{
-                    if showElevenG {
-                        HStack(spacing: 0){
-                            
-                            Image(systemName: "photo")
-                                .padding(.bottom, 15.0)
-                                .padding(.top, 15.0)
-                                .padding(.leading, 15.0)
-                                .frame(width: 40, alignment: .leading)
-        //                      .renderingMode(.original)
-                                
-                                Text("Screenshot (3s)")
-                                    .fontWeight(.medium)
-                                    .padding(.bottom, 15.0)
-                                    .padding(.top, 15.0)
-                                    .frame(width: 205, alignment: .leading)
-                                    
-                                
-                            Button(action: {
-                                comando(arg: screenshot)
-                            }){
-                                Text("Take")
-                            }
-                                    .frame(alignment: .leading)
-                                    .padding(.top, 15.0)
-                        }
+                    if !UserDefaults.standard.bool(forKey: "ElevenT") {
+                        ButtonView("Screenshot (3s)", "photo", screenshot, "Take")
                     }
                     
                     Text("")
@@ -528,9 +242,12 @@ struct MenuView: View {
                     Divider()
                         .padding(.horizontal, 10.0)
                         .frame(width: 300)
+                    
                 }
                 
+                
                 Group{
+                    // Footer
                     HStack{
                         
                         Button(action:{
@@ -597,8 +314,4 @@ struct MenuView: View {
     
 }
 
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView()
-    }
-}
+
