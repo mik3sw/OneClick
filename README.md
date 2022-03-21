@@ -16,9 +16,13 @@ OneClick can give you quick access to some macOS functions from MenuBar!
 * **Intel app** (only 1.4 and before)
 * **Apple Silicon app** (all versions)
 
-## 💾 [Downloads](https://github.com/mik3sw/OneClick/releases) 
+## 💾 Downloads 
 [![Github All Releases](https://img.shields.io/github/downloads/mik3sw/OneClick/total.svg?style=for-the-badge&logo=github&color=blueviolet)]() 
 
+* [Releases](https://github.com/mik3sw/OneClick/releases)
+* HomeBrew soon ...
+
+> OneClick 2.0 is currently in beta i need to fix some errors and bugs
 
 <details>
 <summary>Show functions</summary>
@@ -97,8 +101,7 @@ From settings you can select Themes (dark and light), "launch at login" function
 
 ## 🎨 Themes
 
-ToDo: 
-* Select image from storage
+Here a preview of light and dark themes
 
 
 |   |   |   |   |   |   |
@@ -106,6 +109,17 @@ ToDo:
 | ![](imgs/lightThemes/1.png)  |  ![](imgs/lightThemes/2.png) |  ![](imgs/lightThemes/3.png) | ![](imgs/lightThemes/4.png)  | ![](imgs/lightThemes/5.png)  | ![](imgs/lightThemes/6.png) |
 | ![](imgs/darkThemes/1.png)  | ![](imgs/darkThemes/2.png)  |  ![](imgs/darkThemes/3.png) | ![](imgs/darkThemes/4.png)  | ![](imgs/darkThemes/5.png)  |  ![](imgs/darkThemes/6.png) |
 
+## ToDo
+
+* Select theme image from storage
+* Persistent data (at the moment settings will reset if you close the app)
+* New Functions
+* Custom toggles
+
+## Reviews
+
+* [MacUpdate](https://www.macupdate.com/app/mac/63828/oneclick)
+* [Softpedia](https://mac.softpedia.com/get/System-Utilities/mik3sw-OneClick.shtml)
 
 ## Credits
 
