@@ -117,10 +117,10 @@ Here a preview of light and dark themes
 
 ## ToDo
 
-[] Select theme image from storage
-[x] Persistent data (at the moment settings will reset if you close the app)
-[] New Functions
-[x] Custom toggles
+- [ ] Select theme image from storage
+- [x] Persistent data (at the moment settings will reset if you close the app)
+- [ ] New Functions
+- [x] Custom toggles
 
 ## Reviews
 
