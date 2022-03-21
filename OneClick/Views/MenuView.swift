@@ -45,6 +45,12 @@ struct MenuView: View {
     @AppStorage("NineT") var showNine: Bool = true
     @AppStorage("TenT") var showTen: Bool = true
     @AppStorage("ElevenT") var showEleven: Bool = true
+    @AppStorage("CustomT") var showcustom: Bool = false
+    
+    @AppStorage("CustomIcon") var customIcon: String = ""
+    @AppStorage("CustomName") var customName: String = ""
+    @AppStorage("CustomCommandTrue") var customCommandTrue: String = ""
+    @AppStorage("CustomCommandFalse") var customCommandFalse: String = ""
     
     //@AppStorage("FiveT") var showFive: Bool = true
     
@@ -98,6 +104,9 @@ struct MenuView: View {
                     
                     
                     // ToggleViews
+                    if UserDefaults.standard.bool(forKey: "CustomT") {
+                        ToggleView("\(customName)", "\(customIcon)", "Custom toggle", "\(customCommandTrue)", "\(customCommandFalse)", false)
+                    }
                     
                     if !UserDefaults.standard.bool(forKey: "OneT") {
                         ToggleView("Desktop Files", "menubar.dock.rectangle", "Hide/show files and folders in your desktop", hideDesktop, showDesktop, selected1)

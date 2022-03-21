@@ -552,24 +552,89 @@ struct ShortcutSettingsView: View {
 struct CustomToggleView: View {
     @AppStorage("showPreview") private var showPreview = true
     @AppStorage("fontSize") private var fontSize = 15.0
-    @State var enableCustom : Bool = false
+    
+    @State var enableCustom : Bool = UserDefaults.standard.bool(forKey: "CustomT")
+    @State var customCommand1 : String = (UserDefaults.standard.string(forKey: "CustomCommandTrue") ?? "")
+    @State var customCommand2 : String = (UserDefaults.standard.string(forKey: "CustomCommandTrue") ?? "")
+    @State var customName : String = (UserDefaults.standard.string(forKey: "CustomName") ?? "")
+    
+    enum Icons: String, CaseIterable, Identifiable {
+        case command, flame, bolt, leaf, brain, gamecontroller
+        var id: Self { self }
+    }
+
+    @State private var selectedIcon: Icons = .command
     
     var body: some View{
         ZStack{
             VStack(alignment: .leading, spacing: 0){
                 HStack(spacing: 0){
-                    Toggle("Enable custom toggles", isOn: $enableCustom)
+                    Toggle("Enable custom toggles (Beta)", isOn: $enableCustom)
                         .onChange(of: enableCustom) { value in
-                            if(value){
-                            
-                            } else{
-                            
-                            }
+                            //enableCustom = !enableCustom
+                            UserDefaults.standard.set(enableCustom, forKey: "CustomT")
                         }
                         .padding(.leading, 15.0)
                         .padding(.top, 15.0)
                         .padding(.bottom, 10.0)
                         .frame(width: 500, alignment: .leading)
+                }
+                
+                
+                
+                if enableCustom {
+                    VStack{
+                        Text("Custom Toggle 1").fontWeight(.medium)
+                        TextField(
+                                "Name",
+                                text: $customName
+                        ).onChange(of: customName) {tag in
+                            UserDefaults.standard.set(customName, forKey: "CustomName")
+                        }
+                        Picker("Icon", selection: $selectedIcon) {
+                                Text("\(Image(systemName: "command"))").tag(Icons.command)
+                                Text("\(Image(systemName: "flame"))").tag(Icons.flame)
+                                Text("\(Image(systemName: "bolt"))").tag(Icons.bolt)
+                                Text("\(Image(systemName: "leaf"))").tag(Icons.leaf)
+                                Text("\(Image(systemName: "brain"))").tag(Icons.brain)
+                                Text("\(Image(systemName: "gamecontroller"))").tag(Icons.gamecontroller)
+                            }.onChange(of: selectedIcon) { tag in
+                                UserDefaults.standard.set(selectedIcon.rawValue, forKey: "CustomIcon")
+                                //UserDefaults.standard.set(selectedDark.rawValue, forKey: "dark")
+                                
+                            }
+                        
+                        
+                        TextField(
+                                "commandTrue",
+                                text: $customCommand1
+                            ).onChange(of: customCommand1) { tag in
+                                UserDefaults.standard.set(customCommand1, forKey: "CustomCommandTrue")
+                                //UserDefaults.standard.set(selectedDark.rawValue, forKey: "dark")
+                                
+                            }
+                        TextField(
+                                "commandFalse",
+                                text: $customCommand2
+                            )
+                        .onChange(of: customCommand2) { tag in
+                            UserDefaults.standard.set(customCommand2, forKey: "CustomCommandFalse")
+                            //UserDefaults.standard.set(selectedDark.rawValue, forKey: "dark")
+                            
+                        }
+                        
+                        Group{
+                            Text("")
+                            Text("Tutorial:").fontWeight(.medium)
+                            Text("Type toggle name, choose toggle icon and set two terminal commands.")
+                            Text("commandTrue when the toggle is selected, commandFalse when the")
+                            Text("toggle isn't selected. See GitHub page (About) for examples.")
+                            Text("Finally hit refresh button \(Image(systemName: "goforward"))")
+                        }
+                        
+                    }
+                    
+                    
                 }
                 
             }

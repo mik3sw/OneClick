@@ -91,9 +91,15 @@ Command:
 
 From settings you can select Themes (dark and light), "launch at login" function and edit the main view elements.
 
-| General  |  Edit  |
-|---|---|
-|  ![](imgs/General.png) | ![](imgs/Edit.png)  |
+| General  |  Edit  | Custom Toggles |
+|---|---|---|
+|  ![](imgs/General.png) | ![](imgs/Edit.png)  | ![](imgs/customToggles.png) |
+
+
+## Custom Toggles (Beta)
+> This is a beta feature, you can only add one custom toggle 
+
+![](imgs/customTogglesExample.png)
 
 
 
@@ -111,10 +117,10 @@ Here a preview of light and dark themes
 
 ## ToDo
 
-* Select theme image from storage
-* Persistent data (at the moment settings will reset if you close the app)
-* New Functions
-* Custom toggles
+* [] Select theme image from storage
+* [x] Persistent data (at the moment settings will reset if you close the app)
+* [] New Functions
+* [] Custom toggles
 
 ## Reviews
 
