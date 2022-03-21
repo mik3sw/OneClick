@@ -109,5 +109,4 @@ ToDo:
 
 ## Credits
 
-* [Launch at login](https://github.com/sindresorhus/LaunchAtLogin)
-* [BasicAppleGuy - Waves](https://basicappleguy.com/basicappleblog/making-waves) for Yellow Theme 
+* [Launch at login](https://github.com/sindresorhus/LaunchAtLogin) 
