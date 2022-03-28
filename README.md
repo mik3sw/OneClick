@@ -24,7 +24,9 @@ OneClick can give you quick access to some macOS functions from MenuBar!
 * [Releases](https://github.com/mik3sw/OneClick/releases)
 * HomeBrew soon ...
 
-> OneClick 2.0 is currently in beta i need to fix some errors and bugs
+> OneClick 2.x is currently in beta i need to fix some errors and bugs
+
+> This is a hobbyist app
 
 
 
