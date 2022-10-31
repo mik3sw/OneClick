@@ -21,6 +21,8 @@ OneClick can give you quick access to some macOS functions from MenuBar!
 
 **Support me with a star!** ⭐️ 
 
+**Not fully compatible with macOS Ventura 13.0**
+
 * [Releases](https://github.com/mik3sw/OneClick/releases)
 * HomeBrew soon ...
 
