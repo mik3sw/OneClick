@@ -15,6 +15,8 @@ final class Preferences {
     var customItems: [CustomItem] { didSet { save() } }
     /// Last known state of custom toggles that have no status command.
     var customToggleStates: [UUID: Bool] { didSet { save() } }
+    /// Global keyboard shortcuts for built-in items.
+    private(set) var featureShortcuts: [Feature: HotKey] { didSet { save() } }
 
     private let defaults: UserDefaults
 
@@ -24,6 +26,7 @@ final class Preferences {
         static let hiddenFeatures = "hiddenFeatures"
         static let customItems = "customItems"
         static let customToggleStates = "customToggleStates"
+        static let featureShortcuts = "featureShortcuts"
         static let didAddExamples = "didAddExampleCustomItems"
     }
 
@@ -34,6 +37,7 @@ final class Preferences {
         hiddenFeatures = Self.load(Set<Feature>.self, Key.hiddenFeatures, from: defaults) ?? []
         customItems = Self.load([CustomItem].self, Key.customItems, from: defaults) ?? []
         customToggleStates = Self.load([UUID: Bool].self, Key.customToggleStates, from: defaults) ?? [:]
+        featureShortcuts = Self.load([Feature: HotKey].self, Key.featureShortcuts, from: defaults) ?? [:]
         migrateLegacySettings()
         addExamplesOnce()
     }
@@ -62,6 +66,7 @@ final class Preferences {
     // MARK: Custom items
 
     func upsert(_ item: CustomItem) {
+        if let shortcut = item.shortcut { removeShortcut(shortcut) }
         if let index = customItems.firstIndex(where: { $0.id == item.id }) {
             customItems[index] = item
         } else {
@@ -78,6 +83,44 @@ final class Preferences {
         customItems.move(fromOffsets: source, toOffset: destination)
     }
 
+    /// Adds shared items as new entries, without their shortcuts.
+    func importItems(_ items: [CustomItem]) {
+        customItems += items.map(\.sharable)
+    }
+
+    // MARK: Shortcuts
+
+    func shortcut(for feature: Feature) -> HotKey? { featureShortcuts[feature] }
+
+    /// Assigns a shortcut to a built-in item, removing it from any other item.
+    func setShortcut(_ shortcut: HotKey?, for feature: Feature) {
+        if let shortcut { removeShortcut(shortcut) }
+        featureShortcuts[feature] = shortcut
+    }
+
+    /// Assigns a shortcut to a custom item, removing it from any other item.
+    func setShortcut(_ shortcut: HotKey?, for item: CustomItem) {
+        guard let index = customItems.firstIndex(where: { $0.id == item.id }) else { return }
+        if let shortcut { removeShortcut(shortcut) }
+        customItems[index].shortcut = shortcut
+    }
+
+    /// Clears `shortcut` from every item that uses it, so each key combination does one thing.
+    func removeShortcut(_ shortcut: HotKey) {
+        for (feature, existing) in featureShortcuts where existing.matches(shortcut) {
+            featureShortcuts[feature] = nil
+        }
+        for index in customItems.indices where customItems[index].shortcut?.matches(shortcut) == true {
+            customItems[index].shortcut = nil
+        }
+    }
+
+    /// Every shortcut with what it triggers.
+    var shortcutBindings: [(HotKey, ItemReference)] {
+        featureShortcuts.map { ($0.value, .feature($0.key)) }
+            + customItems.compactMap { item in item.shortcut.map { ($0, .custom(item.id)) } }
+    }
+
     // MARK: Persistence
 
     private func save() {
@@ -86,6 +129,7 @@ final class Preferences {
         Self.store(hiddenFeatures, Key.hiddenFeatures, in: defaults)
         Self.store(customItems, Key.customItems, in: defaults)
         Self.store(customToggleStates, Key.customToggleStates, in: defaults)
+        Self.store(featureShortcuts, Key.featureShortcuts, in: defaults)
     }
 
     private static func load<T: Decodable>(_ type: T.Type, _ key: String, from defaults: UserDefaults) -> T? {

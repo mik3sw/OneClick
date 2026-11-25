@@ -13,6 +13,8 @@ struct ToggleTile: View {
     var isBusy = false
     /// Replaces the On/Off label, e.g. for buttons that have no state.
     var subtitle: String?
+    /// Shows the subtitle in red, e.g. when an info command failed.
+    var subtitleIsError = false
     var tint: Color = .accentColor
     var help = ""
     let action: () -> Void
@@ -27,7 +29,9 @@ struct ToggleTile: View {
                         .lineLimit(1)
                     Text(subtitle ?? (isOn ? "On" : "Off"))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(subtitleIsError ? AnyShapeStyle(.red) : AnyShapeStyle(.secondary))
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                         .contentTransition(.numericText())
                 }
                 Spacer(minLength: 0)
@@ -40,7 +44,7 @@ struct ToggleTile: View {
         .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 16))
         .disabled(isBusy)
         .help(help)
-        .accessibilityValue(isOn ? "On" : "Off")
+        .accessibilityValue(subtitle ?? (isOn ? "On" : "Off"))
         .accessibilityAddTraits(.isToggle)
         .animation(.snappy, value: isOn)
     }

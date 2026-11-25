@@ -14,6 +14,8 @@ struct MenuContentView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var confirmingEmptyTrash = false
+    /// A custom item waiting for its confirming second click.
+    @State private var confirmingItem: CustomItem.ID?
     @State private var confirmationReset: Task<Void, Never>?
 
     private let twoColumns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 2)
@@ -76,6 +78,8 @@ struct MenuContentView: View {
         .frame(width: 340)
         .animation(.snappy, value: system.error)
         .onAppear { system.refresh() }
+        // Refreshes info tiles while the panel is open; cancelled when it closes.
+        .task { await system.monitorInfoItems() }
     }
 
     private var header: some View {
@@ -101,28 +105,89 @@ struct MenuContentView: View {
         .padding(.leading, 4)
     }
 
+    /// Custom items under their group headings, in the order the groups first appear.
+    private var customGroups: [(title: String, items: [CustomItem])] {
+        var groups: [(title: String, items: [CustomItem])] = []
+        for item in preferences.customItems {
+            if let index = groups.firstIndex(where: { $0.title == item.displayGroup }) {
+                groups[index].items.append(item)
+            } else {
+                groups.append((item.displayGroup, [item]))
+            }
+        }
+        return groups
+    }
+
     private var customSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Custom")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.secondary)
-                .padding(.leading, 4)
-            LazyVGrid(columns: twoColumns, spacing: 8) {
-                ForEach(preferences.customItems) { item in
-                    let done = system.didJustComplete(item)
-                    ToggleTile(
-                        title: item.name,
-                        symbol: done ? "checkmark" : item.symbol,
-                        isOn: done || (item.kind == .toggle && system.isOn(item)),
-                        isBusy: system.isBusy(item),
-                        subtitle: item.kind == .action ? (done ? "Done" : "Run") : nil,
-                        tint: done ? .green : .accentColor,
-                        help: item.onCommand
-                    ) {
-                        system.activate(item)
+        ForEach(customGroups, id: \.title) { group in
+            VStack(alignment: .leading, spacing: 8) {
+                Text(group.title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .padding(.leading, 4)
+                LazyVGrid(columns: twoColumns, spacing: 8) {
+                    ForEach(group.items) { item in
+                        customTile(item)
                     }
                 }
             }
+        }
+    }
+
+    private func customTile(_ item: CustomItem) -> some View {
+        let done = system.didJustComplete(item)
+        let copied = system.didJustCopy(item)
+        let confirming = confirmingItem == item.id
+        let info = system.infoValue(item)
+
+        let subtitle: String? = if copied {
+            "Copied"
+        } else if done {
+            "Done"
+        } else if confirming {
+            "Click to confirm"
+        } else {
+            switch item.kind {
+            case .toggle: nil
+            case .action: "Run"
+            case .info: info?.text ?? "Loading…"
+            }
+        }
+        let symbol = if copied { "doc.on.doc.fill" } else if done { "checkmark" } else { item.symbol }
+        let tint: Color = confirming ? .red : (done || copied) ? .green : .accentColor
+        let help = switch item.kind {
+        case .info: [info?.text, "Click to copy."].compactMap(\.self).joined(separator: "\n\n")
+        default: item.onCommand
+        }
+
+        return ToggleTile(
+            title: item.name,
+            symbol: symbol,
+            isOn: done || copied || confirming || (item.kind == .toggle && system.isOn(item)),
+            isBusy: system.isBusy(item) && (item.kind != .info || info == nil),
+            subtitle: subtitle,
+            subtitleIsError: item.kind == .info && info?.failed == true && !copied,
+            tint: tint,
+            help: help
+        ) {
+            activate(item)
+        }
+    }
+
+    private func activate(_ item: CustomItem) {
+        guard item.requiresConfirmation, item.kind != .info, confirmingItem != item.id else {
+            confirmationReset?.cancel()
+            confirmingItem = nil
+            system.activate(item)
+            return
+        }
+        // Ask for a second click, like Empty Trash.
+        confirmingItem = item.id
+        confirmationReset?.cancel()
+        confirmationReset = Task {
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled else { return }
+            confirmingItem = nil
         }
     }
 

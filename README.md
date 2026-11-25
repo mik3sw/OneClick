@@ -24,7 +24,10 @@
 
 - **Control Center–style panel** with Liquid Glass tiles that show the real state of your Mac
 - **11 built-in toggles and actions**: hide the desktop, Dock or menu bar, Dark Mode, Low Power Mode, Keep Awake and more
-- **Your own toggles and buttons**: run any shell command or script, with a picker for every SF Symbol
+- **Your own toggles, buttons and info tiles**: run any shell command or script, with a picker for every SF Symbol
+- **Global keyboard shortcuts** for every item, built-in or custom
+- **Shortcuts app and Spotlight**: every item is an App Intent you can automate
+- **Share items** as files or `oneclick://` links, and grab ready-made ones from the [gallery](gallery)
 - **Lightweight and native**: about 4 MB, universal (Apple Silicon and Intel), no third-party dependencies
 - **Free and open source** under the MIT License
 
@@ -73,16 +76,29 @@ To start OneClick automatically, turn on **Launch at login** in Settings › Gen
 | **Free Memory** | Runs `purge` (asks for an administrator password) |
 | **Screenshot** | Captures the screen after 3 seconds into your screenshots folder |
 
-You can show, hide and reorder every item in **Settings › Menu**.
+You can show, hide and reorder every item in **Settings › Menu**, and give any of them a keyboard shortcut.
 
 ## Custom items
 
 ![The OneClick panel with custom items, next to the Custom tab in Settings](imgs/panel-and-settings.webp)
 
-In **Settings › Custom** you can add as many toggles and buttons as you like, each with your own commands and any SF Symbol, chosen from a searchable picker with every symbol in macOS.
+In **Settings › Custom** you can add as many items as you like, each with your own commands and any SF Symbol, chosen from a searchable picker with every symbol in macOS.
 
 - **Toggle**: one command for on and one for off. Add an optional *status check*: the toggle shows as on when that command exits with code `0`. Without one, OneClick remembers the last state.
 - **Button**: runs a single command and shows a checkmark when it succeeds.
+- **Info**: shows what a command prints (your IP, battery, current git branch…) and refreshes it while the panel is open. Click it to copy the text.
+
+Each item also has these options:
+
+| Option | What it does |
+|---|---|
+| **Group** | Shows the item under its own heading in the panel |
+| **Run as administrator** | Runs the commands as root after Touch ID or your password |
+| **Ask for confirmation** | Needs a second click in the panel, like Empty Trash |
+| **Copy output to clipboard** | Buttons copy what the command prints |
+| **Stop after** | Stops a command that runs longer than the time you choose |
+| **Refresh every** | How often an info tile updates |
+| **Keyboard shortcut** | Runs the item from anywhere, even when the panel is closed |
 
 Commands run in your login shell (`zsh -l`), so tools installed with Homebrew are found. If a command fails, its error message appears in the panel.
 
@@ -117,6 +133,30 @@ node ~/scripts/deploy.js
 
 Exit with a non-zero status and write to stderr to show an error in the panel (`sys.exit(1)` in Python).
 
+## Keyboard shortcuts
+
+Click **Record Shortcut** next to any item in **Settings › Menu**, or in a custom item's editor, then press the keys. Shortcuts need ⌃, ⌥ or ⌘ (F-keys work on their own). Press Esc to cancel or Delete to remove a shortcut. A warning icon means macOS or another app already uses that combination.
+
+Shortcuts work like a click in the panel: they flip toggles, run buttons and copy info tiles, without asking for confirmation.
+
+## Shortcuts app and Spotlight
+
+OneClick adds three actions to the Shortcuts app, and they also appear in Spotlight:
+
+| Action | What it does |
+|---|---|
+| **Run OneClick Item** | Does what clicking the item does, and returns the command's output |
+| **Set OneClick Toggle** | Turns a toggle on or off, whatever its current state |
+| **Get OneClick Toggle State** | Returns whether a toggle is on, for use in conditions |
+
+Combine them with automations, for example turn on Keep Awake when a presentation app opens, or run a custom item at a given time.
+
+## Sharing items
+
+Right-click a custom item in **Settings › Custom** to **Copy Link** or **Export…** it. The **⋯** menu imports and exports files with several items. OneClick always shows the commands for your review before adding anything, and shortcuts are never shared.
+
+The [gallery](gallery) has ready-made packs for developers, networking and system info.
+
 ## Permissions
 
 The first time you use some features, macOS asks for permission:
@@ -142,12 +182,13 @@ cd OneClick
 open OneClick.xcodeproj
 ```
 
-Then run the `OneClick` scheme. The code is organized in three folders:
+Then run the `OneClick` scheme. The code is organized in these folders:
 
 | Folder | Contents |
 |---|---|
 | `OneClick/Model` | Built-in features, custom items, preferences, SF Symbols catalog |
-| `OneClick/Services` | Running commands, reading system state, Keep Awake |
+| `OneClick/Services` | Running commands, reading system state, Keep Awake, keyboard shortcuts, sharing |
+| `OneClick/Intents` | App Intents for the Shortcuts app and Spotlight |
 | `OneClick/Views` | Menu bar panel and Settings window |
 
 ## Contributing

@@ -1,0 +1,39 @@
+{
+  "oneclick": 1,
+  "items": [
+    {
+      "name": "Wi-Fi",
+      "kind": "toggle",
+      "symbol": "wifi",
+      "group": "Network",
+      "onCommand": "networksetup -setairportpower en0 on",
+      "offCommand": "networksetup -setairportpower en0 off",
+      "statusCommand": "networksetup -getairportpower en0 | grep -q On"
+    },
+    {
+      "name": "Flush DNS",
+      "kind": "action",
+      "symbol": "arrow.clockwise.circle",
+      "group": "Network",
+      "runAsAdmin": true,
+      "onCommand": "dscacheutil -flushcache; killall -HUP mDNSResponder"
+    },
+    {
+      "name": "Public IP",
+      "kind": "info",
+      "symbol": "globe",
+      "group": "Network",
+      "refreshInterval": 300,
+      "timeout": 10,
+      "onCommand": "curl -s https://api.ipify.org"
+    },
+    {
+      "name": "Local IP",
+      "kind": "info",
+      "symbol": "network",
+      "group": "Network",
+      "refreshInterval": 60,
+      "onCommand": "ipconfig getifaddr en0 || echo Offline"
+    }
+  ]
+}

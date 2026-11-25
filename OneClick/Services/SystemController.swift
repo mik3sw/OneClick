@@ -6,6 +6,14 @@
 import AppKit
 import Observation
 
+/// The output of an info tile.
+struct InfoValue: Equatable {
+    let text: String
+    let date: Date
+    /// The text is an error message.
+    let failed: Bool
+}
+
 /// A problem to show in the menu, optionally with a shortcut to the relevant settings pane.
 struct ErrorNotice: Equatable {
     let message: String
@@ -21,6 +29,10 @@ final class SystemController {
     private(set) var busyCustomItems: Set<UUID> = []
     /// Custom buttons that just finished successfully, shown briefly as "Done".
     private(set) var completedCustomItems: Set<UUID> = []
+    /// Items whose output was just copied, shown briefly as "Copied".
+    private(set) var copiedCustomItems: Set<UUID> = []
+    /// The latest output of each info tile.
+    private(set) var infoValues: [UUID: InfoValue] = [:]
     var error: ErrorNotice?
 
     private let preferences: Preferences
@@ -40,6 +52,8 @@ final class SystemController {
     func isOn(_ item: CustomItem) -> Bool { customStates[item.id] ?? false }
     func isBusy(_ item: CustomItem) -> Bool { busyCustomItems.contains(item.id) }
     func didJustComplete(_ item: CustomItem) -> Bool { completedCustomItems.contains(item.id) }
+    func didJustCopy(_ item: CustomItem) -> Bool { copiedCustomItems.contains(item.id) }
+    func infoValue(_ item: CustomItem) -> InfoValue? { infoValues[item.id] }
 
     /// Re-reads every toggle from the system.
     func refresh() {
@@ -168,36 +182,153 @@ final class SystemController {
 
     // MARK: Custom items
 
+    /// Runs a custom item from the panel or a shortcut: flips a toggle, runs a button,
+    /// or copies an info tile's text. Errors appear in the panel.
     func activate(_ item: CustomItem) {
         guard !isBusy(item) else { return }
-        let turningOn = item.kind == .action || !isOn(item)
-        busyCustomItems.insert(item.id)
         error = nil
-        if item.kind == .toggle { customStates[item.id] = turningOn }
-
         Task {
-            defer { busyCustomItems.remove(item.id) }
             do {
-                try await CommandRunner.shell(turningOn ? item.onCommand : item.offCommand)
-                if item.kind == .toggle, item.statusCommand.isEmpty {
-                    preferences.customToggleStates[item.id] = turningOn
-                }
-                if item.kind == .action {
-                    flashCompletion(of: item.id)
+                switch item.kind {
+                case .toggle: try await setCustom(item, on: !isOn(item))
+                case .action: _ = try await runCustom(item)
+                case .info: try await copyInfo(item)
                 }
             } catch {
                 report(error)
             }
-            await refreshCustomStates()
         }
     }
 
-    private func flashCompletion(of id: UUID) {
-        completedCustomItems.insert(id)
+    /// Turns a custom toggle on or off and waits for its command to finish.
+    func setCustom(_ item: CustomItem, on turningOn: Bool) async throws {
+        guard item.kind == .toggle, !isBusy(item) else { return }
+        busyCustomItems.insert(item.id)
+        customStates[item.id] = turningOn
+        defer { busyCustomItems.remove(item.id) }
+        do {
+            try await CommandRunner.shell(
+                turningOn ? item.onCommand : item.offCommand, asAdmin: item.runAsAdmin, timeout: item.timeout)
+            if item.statusCommand.isEmpty {
+                preferences.customToggleStates[item.id] = turningOn
+            }
+        } catch {
+            await refreshCustomStates()
+            throw error
+        }
+        await refreshCustomStates()
+    }
+
+    /// Runs a custom button and returns what it printed.
+    @discardableResult
+    func runCustom(_ item: CustomItem) async throws -> String {
+        guard item.kind == .action, !isBusy(item) else { return "" }
+        busyCustomItems.insert(item.id)
+        defer { busyCustomItems.remove(item.id) }
+        let result = try await CommandRunner.shell(item.onCommand, asAdmin: item.runAsAdmin, timeout: item.timeout)
+        if item.copiesOutput, !result.output.isEmpty {
+            copyToClipboard(result.output)
+            flash(item.id, in: \.copiedCustomItems)
+        } else {
+            flash(item.id, in: \.completedCustomItems)
+        }
+        return result.output
+    }
+
+    /// Re-runs an info tile's command and returns the new text.
+    @discardableResult
+    func refreshInfo(_ item: CustomItem) async throws -> String {
+        guard item.kind == .info else { return "" }
+        if busyCustomItems.contains(item.id), let value = infoValues[item.id] { return value.text }
+        busyCustomItems.insert(item.id)
+        defer { busyCustomItems.remove(item.id) }
+        do {
+            let result = try await CommandRunner.shell(item.onCommand, asAdmin: item.runAsAdmin, timeout: item.timeout)
+            let text = result.output.isEmpty ? "–" : result.output
+            infoValues[item.id] = InfoValue(text: text, date: .now, failed: false)
+            return text
+        } catch {
+            infoValues[item.id] = InfoValue(text: error.localizedDescription, date: .now, failed: true)
+            throw error
+        }
+    }
+
+    /// Copies an info tile's current text, refreshing it first if it has none yet.
+    private func copyInfo(_ item: CustomItem) async throws {
+        let text: String
+        if let value = infoValues[item.id], !value.failed {
+            text = value.text
+        } else {
+            text = try await refreshInfo(item)
+        }
+        copyToClipboard(text)
+        flash(item.id, in: \.copiedCustomItems)
+    }
+
+    /// Keeps info tiles up to date while the panel is open. Cancel the calling task to stop.
+    func monitorInfoItems() async {
+        while !Task.isCancelled {
+            for item in preferences.customItems where item.kind == .info && !isBusy(item) {
+                let age = infoValues[item.id].map { Date.now.timeIntervalSince($0.date) } ?? .infinity
+                if age >= Double(item.refreshInterval) {
+                    Task { try? await refreshInfo(item) }
+                }
+            }
+            try? await Task.sleep(for: .seconds(1))
+        }
+    }
+
+    private func copyToClipboard(_ text: String) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+    }
+
+    private func flash(_ id: UUID, in set: ReferenceWritableKeyPath<SystemController, Set<UUID>>) {
+        self[keyPath: set].insert(id)
         Task {
             try? await Task.sleep(for: .seconds(1.5))
-            completedCustomItems.remove(id)
+            self[keyPath: set].remove(id)
         }
+    }
+
+    // MARK: References
+
+    /// Activates an item by reference, as a keyboard shortcut does.
+    func trigger(_ reference: ItemReference) {
+        switch reference {
+        case .feature(let feature):
+            feature.kind == .toggle ? toggle(feature) : run(feature)
+        case .custom(let id):
+            if let item = preferences.customItems.first(where: { $0.id == id }) {
+                activate(item)
+            }
+        }
+    }
+
+    /// Turns a built-in toggle on or off and waits until it's done.
+    func setAndWait(_ feature: Feature, on: Bool) async throws {
+        guard feature.kind == .toggle else { return }
+        busyFeatures.insert(feature)
+        defer {
+            busyFeatures.remove(feature)
+            refresh()
+        }
+        states[feature] = on
+        try await apply(feature, on: on)
+    }
+
+    /// Runs a built-in action and waits until it's done.
+    func runAndWait(_ feature: Feature) async throws {
+        guard feature.kind == .action else { return }
+        busyFeatures.insert(feature)
+        defer { busyFeatures.remove(feature) }
+        try await runAction(feature)
+    }
+
+    /// Reads a custom toggle's real state, running its status check if it has one.
+    func currentState(of item: CustomItem) async -> Bool {
+        await refreshCustomStates()
+        return isOn(item)
     }
 
     // MARK: Errors

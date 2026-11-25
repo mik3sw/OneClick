@@ -28,6 +28,25 @@ struct GeneralSettingsView: View {
             }
 
             Section {
+                LabeledContent {
+                    Button("Open Shortcuts") {
+                        if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.shortcuts") {
+                            NSWorkspace.shared.openApplication(at: url, configuration: .init())
+                        }
+                    }
+                } label: {
+                    Label {
+                        Text("Shortcuts and Spotlight")
+                        Text("Every item is available as an action: Run OneClick Item, Set OneClick Toggle and Get OneClick Toggle State.")
+                    } icon: {
+                        Image(systemName: "square.2.layers.3d")
+                    }
+                }
+            } header: {
+                Text("Automation")
+            }
+
+            Section {
                 PermissionRow(
                     title: "Automation",
                     detail: "Needed for Dock, menu bar, Dark Mode and Empty Trash.",

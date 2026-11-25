@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import os
 
 /// The outcome of a finished process.
 nonisolated struct CommandResult: Sendable {
@@ -34,8 +35,9 @@ nonisolated struct CommandError: LocalizedError, Sendable {
 nonisolated enum CommandRunner {
 
     /// Launches `executable` and waits for it to exit, collecting its output.
+    /// With a `timeout` in seconds, the process and its children are stopped when it runs too long.
     @discardableResult
-    static func run(_ executable: String, _ arguments: [String] = []) async throws -> CommandResult {
+    static func run(_ executable: String, _ arguments: [String] = [], timeout: Int = 0) async throws -> CommandResult {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: executable)
         process.arguments = arguments
@@ -44,19 +46,42 @@ nonisolated enum CommandRunner {
         process.standardOutput = stdout
         process.standardError = stderr
 
+        // Read both pipes while the process runs, so a large output can't fill
+        // the pipe buffer and block the process forever.
+        let outputReader = Task.detached { stdout.fileHandleForReading.readDataToEndOfFile() }
+        let errorReader = Task.detached { stderr.fileHandleForReading.readDataToEndOfFile() }
+
+        let timedOut = OSAllocatedUnfairLock(initialState: false)
         let status: Int32 = try await withCheckedThrowingContinuation { continuation in
             process.terminationHandler = { continuation.resume(returning: $0.terminationStatus) }
             do {
                 try process.run()
             } catch {
                 process.terminationHandler = nil
+                try? stdout.fileHandleForWriting.close()
+                try? stderr.fileHandleForWriting.close()
                 continuation.resume(throwing: error)
+                return
+            }
+            guard timeout > 0 else { return }
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(timeout)) {
+                guard process.isRunning else { return }
+                timedOut.withLock { $0 = true }
+                terminateTree(of: process.processIdentifier)
+                process.terminate()
             }
         }
+        // Our copies of the write ends must be closed, or the readers never see EOF.
+        try? stdout.fileHandleForWriting.close()
+        try? stderr.fileHandleForWriting.close()
 
-        // Both pipes are at EOF once the process has exited.
-        let output = String(decoding: stdout.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
-        let errorOutput = String(decoding: stderr.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+        if timedOut.withLock({ $0 }) {
+            outputReader.cancel()
+            errorReader.cancel()
+            throw CommandError(kind: .failed, message: "Stopped after \(timeout) seconds.")
+        }
+        let output = String(decoding: await outputReader.value, as: UTF8.self)
+        let errorOutput = String(decoding: await errorReader.value, as: UTF8.self)
         return CommandResult(
             status: status,
             output: output.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -64,10 +89,27 @@ nonisolated enum CommandRunner {
         )
     }
 
+    /// Sends SIGTERM to the children of `pid`, so a timed-out shell doesn't leave them running.
+    private static func terminateTree(of pid: Int32) {
+        let pkill = Process()
+        pkill.executableURL = URL(fileURLWithPath: "/usr/bin/pkill")
+        pkill.arguments = ["-TERM", "-P", String(pid)]
+        try? pkill.run()
+        pkill.waitUntilExit()
+    }
+
     /// Runs a user-provided command line in a login shell, so PATH matches Terminal.
+    /// With `asAdmin`, it runs as root after a Touch ID or password prompt.
     @discardableResult
-    static func shell(_ command: String) async throws -> CommandResult {
-        let result = try await run("/bin/zsh", ["-l", "-c", command])
+    static func shell(_ command: String, asAdmin: Bool = false, timeout: Int = 0) async throws -> CommandResult {
+        if asAdmin {
+            // `do shell script` uses /bin/sh with a minimal PATH, so pass the user's PATH along.
+            let path = try await loginPath()
+            let line = "PATH=\(quoted(path)) /bin/zsh -c \(quoted(command))"
+            let output = try await privileged(line, timeout: timeout)
+            return CommandResult(status: 0, output: output, errorOutput: "")
+        }
+        let result = try await run("/bin/zsh", ["-l", "-c", command], timeout: timeout)
         guard result.succeeded else {
             let detail = result.errorOutput.isEmpty ? "exit code \(result.status)" : result.errorOutput
             throw CommandError(kind: .failed, message: "Command failed: \(detail)")
@@ -75,20 +117,39 @@ nonisolated enum CommandRunner {
         return result
     }
 
+    /// The PATH of the user's login shell, cached after the first call.
+    private static func loginPath() async throws -> String {
+        if let cached = cachedPath.withLock({ $0 }) { return cached }
+        let result = try await run("/bin/zsh", ["-l", "-c", "printf %s \"$PATH\""])
+        let path = result.output.isEmpty ? "/usr/bin:/bin:/usr/sbin:/sbin" : result.output
+        cachedPath.withLock { $0 = path }
+        return path
+    }
+
+    private static let cachedPath = OSAllocatedUnfairLock<String?>(initialState: nil)
+
+    /// Wraps `text` in single quotes for the shell.
+    static func quoted(_ text: String) -> String {
+        "'" + text.replacingOccurrences(of: "'", with: "'\\''") + "'"
+    }
+
     /// Runs an AppleScript through `osascript` and maps common failures.
     @discardableResult
-    static func appleScript(_ source: String) async throws -> String {
-        let result = try await run("/usr/bin/osascript", ["-e", source])
+    static func appleScript(_ source: String, timeout: Int = 0) async throws -> String {
+        let result = try await run("/usr/bin/osascript", ["-e", source], timeout: timeout)
         guard result.succeeded else { throw scriptError(from: result.errorOutput) }
         return result.output
     }
 
     /// Runs a shell command with administrator privileges (Touch ID or password prompt).
-    static func privileged(_ command: String) async throws {
+    @discardableResult
+    static func privileged(_ command: String, timeout: Int = 0) async throws -> String {
         let escaped = command
             .replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "\"", with: "\\\"")
-        try await appleScript("do shell script \"\(escaped)\" with administrator privileges")
+        return try await appleScript(
+            "do shell script \"\(escaped)\" with administrator privileges without altering line endings",
+            timeout: timeout)
     }
 
     /// Writes a boolean preference for another app through `defaults`.

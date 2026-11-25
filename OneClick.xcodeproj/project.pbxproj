@@ -14,6 +14,7 @@
 		B7A0000226F0000000000001 /* Exceptions for "OneClick" folder in "OneClick" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Info.plist,
 				OneClick.entitlements,
 			);
 			target = A70B622F237AF87000A2BA73 /* OneClick */;
@@ -198,6 +199,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneClick/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "OneClick uses System Events and Finder to change Dock, menu bar, appearance and Trash settings.";
@@ -229,6 +231,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneClick/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "OneClick uses System Events and Finder to change Dock, menu bar, appearance and Trash settings.";

@@ -1,0 +1,39 @@
+{
+  "oneclick": 1,
+  "items": [
+    {
+      "name": "Docker",
+      "kind": "toggle",
+      "symbol": "shippingbox",
+      "group": "Developer",
+      "onCommand": "open -a Docker",
+      "offCommand": "osascript -e 'quit app \"Docker\"'",
+      "statusCommand": "docker info >/dev/null 2>&1",
+      "timeout": 30
+    },
+    {
+      "name": "Kill Port 3000",
+      "kind": "action",
+      "symbol": "xmark.octagon",
+      "group": "Developer",
+      "requiresConfirmation": true,
+      "onCommand": "pids=$(lsof -ti tcp:3000 -sTCP:LISTEN); if [ -z \"$pids\" ]; then echo \"Nothing is listening on port 3000.\" >&2; exit 1; fi; kill $pids"
+    },
+    {
+      "name": "Clean DerivedData",
+      "kind": "action",
+      "symbol": "hammer",
+      "group": "Developer",
+      "requiresConfirmation": true,
+      "onCommand": "rm -rf ~/Library/Developer/Xcode/DerivedData/*"
+    },
+    {
+      "name": "Copy UUID",
+      "kind": "action",
+      "symbol": "number",
+      "group": "Developer",
+      "copiesOutput": true,
+      "onCommand": "uuidgen"
+    }
+  ]
+}

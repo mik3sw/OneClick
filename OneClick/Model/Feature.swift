@@ -6,7 +6,7 @@
 import Foundation
 
 /// A built-in OneClick function.
-enum Feature: String, CaseIterable, Identifiable, Codable {
+nonisolated enum Feature: String, CaseIterable, Identifiable, Codable, Sendable {
     // Toggles
     case hideDesktopIcons
     case showHiddenFiles

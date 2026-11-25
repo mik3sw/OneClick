@@ -1,0 +1,36 @@
+{
+  "oneclick": 1,
+  "items": [
+    {
+      "name": "Battery",
+      "kind": "info",
+      "symbol": "battery.75percent",
+      "group": "System",
+      "refreshInterval": 60,
+      "onCommand": "pmset -g batt | grep -Eo '[0-9]+%'"
+    },
+    {
+      "name": "Uptime",
+      "kind": "info",
+      "symbol": "clock",
+      "group": "System",
+      "refreshInterval": 300,
+      "onCommand": "uptime | sed -E 's/.*up ([^,]*),.*/\\1/'"
+    },
+    {
+      "name": "Lock Screen",
+      "kind": "action",
+      "symbol": "lock",
+      "group": "System",
+      "onCommand": "pmset displaysleepnow"
+    },
+    {
+      "name": "Eject All Disks",
+      "kind": "action",
+      "symbol": "eject",
+      "group": "System",
+      "requiresConfirmation": true,
+      "onCommand": "osascript -e 'tell application \"Finder\" to eject (every disk whose ejectable is true)'"
+    }
+  ]
+}

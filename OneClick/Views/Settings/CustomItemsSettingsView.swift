@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-/// Lists the user's custom toggles and buttons.
+/// Lists the user's custom toggles, buttons and info tiles.
 struct CustomItemsSettingsView: View {
     @Environment(Preferences.self) private var preferences
     @State private var editing: CustomItem?
@@ -17,20 +17,19 @@ struct CustomItemsSettingsView: View {
                 ContentUnavailableView {
                     Label("No Custom Items", systemImage: "terminal")
                 } description: {
-                    Text("Add toggles and buttons that run your own shell commands.")
+                    Text("Add toggles, buttons and info tiles that run your own shell commands.")
                 } actions: {
                     Button("Add Item") { editing = CustomItem() }
                         .buttonStyle(.glassProminent)
+                    Button("Import…") { ItemSharing.importFromFile(into: preferences) }
+                        .buttonStyle(.glass)
                 }
             } else {
                 List(selection: $selection) {
                     ForEach(preferences.customItems) { item in
                         CustomItemRow(item: item)
                             .tag(item.id)
-                            .contextMenu {
-                                Button("Edit…") { editing = item }
-                                Button("Delete", role: .destructive) { preferences.remove(item) }
-                            }
+                            .contextMenu { itemMenu(item) }
                     }
                     .onMove(perform: preferences.moveCustomItems)
                 }
@@ -45,10 +44,21 @@ struct CustomItemsSettingsView: View {
             }
         }
         .sheet(item: $editing) { item in
-            CustomItemEditor(item: item) { saved in
+            CustomItemEditor(item: item, existingGroups: groups) { saved in
                 preferences.upsert(saved)
             }
         }
+    }
+
+    @ViewBuilder
+    private func itemMenu(_ item: CustomItem) -> some View {
+        Button("Edit…") { editing = item }
+        Button("Duplicate") { duplicate(item) }
+        Divider()
+        Button("Copy Link") { ItemSharing.copyLink(for: item) }
+        Button("Export…") { ItemSharing.export([item]) }
+        Divider()
+        Button("Delete", role: .destructive) { preferences.remove(item) }
     }
 
     private var toolbar: some View {
@@ -61,6 +71,18 @@ struct CustomItemsSettingsView: View {
                 }
             }
             .disabled(selectedItem == nil)
+            Menu("More", systemImage: "ellipsis.circle") {
+                Button("Import…") { ItemSharing.importFromFile(into: preferences) }
+                Button("Export All…") { ItemSharing.export(preferences.customItems) }
+                Divider()
+                if let item = selectedItem {
+                    Button("Export “\(item.name)”…") { ItemSharing.export([item]) }
+                    Button("Copy Link to “\(item.name)”") { ItemSharing.copyLink(for: item) }
+                    Button("Duplicate “\(item.name)”") { duplicate(item) }
+                }
+            }
+            .menuIndicator(.hidden)
+            .fixedSize()
             Spacer()
             Button("Edit…") { edit(selection) }
                 .disabled(selectedItem == nil)
@@ -74,8 +96,23 @@ struct CustomItemsSettingsView: View {
         preferences.customItems.first { $0.id == selection }
     }
 
+    /// Group names already in use, for the editor's picker.
+    private var groups: [String] {
+        var seen = Set<String>()
+        return preferences.customItems
+            .map { $0.group.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty && seen.insert($0).inserted }
+    }
+
     private func edit(_ id: CustomItem.ID?) {
         editing = preferences.customItems.first { $0.id == id }
+    }
+
+    private func duplicate(_ item: CustomItem) {
+        var copy = item.sharable
+        copy.name += " Copy"
+        preferences.upsert(copy)
+        selection = copy.id
     }
 }
 
@@ -94,9 +131,21 @@ private struct CustomItemRow: View {
                     .truncationMode(.middle)
             }
             Spacer()
-            Text(item.kind == .toggle ? "Toggle" : "Button")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(item.group.isEmpty ? item.kind.title : "\(item.kind.title) · \(item.group)")
+                if let shortcut = item.shortcut {
+                    Text(shortcut.displayString)
+                        .monospaced()
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            if item.runAsAdmin {
+                Image(systemName: "lock.fill")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .help("Runs as administrator")
+            }
         }
         .padding(.vertical, 4)
     }
