@@ -1,8 +1,14 @@
 {
   "images" : [
     {
-      "filename" : "round_rocket_launch_black_24dp.png",
-      "idiom" : "mac"
+      "filename" : "rocket.png",
+      "idiom" : "mac",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "rocket@2x.png",
+      "idiom" : "mac",
+      "scale" : "2x"
     }
   ],
   "info" : {

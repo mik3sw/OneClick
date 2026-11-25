@@ -1,0 +1,40 @@
+{
+  "fill": {
+    "linear-gradient": [
+      "display-p3:0.20000,0.55000,1.00000,1.00000",
+      "display-p3:0.12000,0.25000,0.95000,1.00000"
+    ]
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "glass": true,
+          "image-name": "rocket.png",
+          "name": "rocket",
+          "position": {
+            "scale": 0.5,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.5
+      },
+      "specular": true,
+      "translucency": {
+        "enabled": true,
+        "value": 0.3
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": [
+      "macOS"
+    ]
+  }
+}

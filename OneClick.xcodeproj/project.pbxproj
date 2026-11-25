@@ -3,50 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 77;
 	objects = {
-
-/* Begin PBXBuildFile section */
-		A70B6234237AF87000A2BA73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B6233237AF87000A2BA73 /* AppDelegate.swift */; };
-		A70B6238237AF87700A2BA73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A70B6237237AF87700A2BA73 /* Assets.xcassets */; };
-		A70B623B237AF87700A2BA73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A70B623A237AF87700A2BA73 /* Preview Assets.xcassets */; };
-		A70B623E237AF87700A2BA73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A70B623C237AF87700A2BA73 /* Main.storyboard */; };
-		A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624B237B003900A2BA73 /* StatusBarController.swift */; };
-		A70B6250237B022700A2BA73 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B624F237B022700A2BA73 /* MainViewController.swift */; };
-		A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B6251237B078200A2BA73 /* EventMonitor.swift */; };
-		B71F5CDC27E8C04C00CA8ECE /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */; };
-		B76B2E3F276F775E008E6460 /* ShellCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B2E3E276F775E008E6460 /* ShellCommands.swift */; };
-		B76F381F27D2AF1900812227 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76F381E27D2AF1900812227 /* SettingsView.swift */; };
-		B7D22575276A863A003286EC /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D22574276A863A003286EC /* MenuView.swift */; };
-		B7D225B0276A8E24003286EC /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D225AF276A8E24003286EC /* Functions.swift */; };
-		B7E1751E27D2928300EAF7B0 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = B7E1751D27D2928300EAF7B0 /* LaunchAtLogin */; settings = {ATTRIBUTES = (Required, ); }; };
-/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A70B6230237AF87000A2BA73 /* OneClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A70B6233237AF87000A2BA73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A70B6237237AF87700A2BA73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A70B623A237AF87700A2BA73 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A70B623D237AF87700A2BA73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A70B623F237AF87700A2BA73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A70B6240237AF87700A2BA73 /* OneClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneClick.entitlements; sourceTree = "<group>"; };
-		A70B624B237B003900A2BA73 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
-		A70B624F237B022700A2BA73 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A70B6251237B078200A2BA73 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
-		B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
-		B757C998276CE0EE004BC3F4 /* OneClick-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OneClick-Bridging-Header.h"; sourceTree = "<group>"; };
-		B76B2E3E276F775E008E6460 /* ShellCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellCommands.swift; sourceTree = "<group>"; };
-		B76F381E27D2AF1900812227 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		B7D22574276A863A003286EC /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		B7D225AF276A8E24003286EC /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B7A0000226F0000000000001 /* Exceptions for "OneClick" folder in "OneClick" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				OneClick.entitlements,
+			);
+			target = A70B622F237AF87000A2BA73 /* OneClick */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B7A0000126F0000000000001 /* OneClick */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B7A0000226F0000000000001 /* Exceptions for "OneClick" folder in "OneClick" target */,
+			);
+			path = OneClick;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A70B622D237AF87000A2BA73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E1751E27D2928300EAF7B0 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +45,7 @@
 		A70B6227237AF87000A2BA73 = {
 			isa = PBXGroup;
 			children = (
-				A70B6232237AF87000A2BA73 /* OneClick */,
+				B7A0000126F0000000000001 /* OneClick */,
 				A70B6231237AF87000A2BA73 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,60 +58,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A70B6232237AF87000A2BA73 /* OneClick */ = {
-			isa = PBXGroup;
-			children = (
-				B76B2E3D276F7727008E6460 /* Commands */,
-				B7D225AF276A8E24003286EC /* Functions.swift */,
-				A70B6233237AF87000A2BA73 /* AppDelegate.swift */,
-				A70B6249237B000700A2BA73 /* Helpers */,
-				A70B6253237B081200A2BA73 /* Views */,
-				A70B6237237AF87700A2BA73 /* Assets.xcassets */,
-				A70B623C237AF87700A2BA73 /* Main.storyboard */,
-				A70B624F237B022700A2BA73 /* MainViewController.swift */,
-				A70B623F237AF87700A2BA73 /* Info.plist */,
-				A70B6240237AF87700A2BA73 /* OneClick.entitlements */,
-				A70B6239237AF87700A2BA73 /* Preview Content */,
-				B757C998276CE0EE004BC3F4 /* OneClick-Bridging-Header.h */,
-			);
-			path = OneClick;
-			sourceTree = "<group>";
-		};
-		A70B6239237AF87700A2BA73 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				A70B623A237AF87700A2BA73 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		A70B6249237B000700A2BA73 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				A70B624B237B003900A2BA73 /* StatusBarController.swift */,
-				A70B6251237B078200A2BA73 /* EventMonitor.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		A70B6253237B081200A2BA73 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B7D22574276A863A003286EC /* MenuView.swift */,
-				B76F381E27D2AF1900812227 /* SettingsView.swift */,
-				B71F5CDB27E8C04C00CA8ECE /* ToggleView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		B76B2E3D276F7727008E6460 /* Commands */ = {
-			isa = PBXGroup;
-			children = (
-				B76B2E3E276F775E008E6460 /* ShellCommands.swift */,
-			);
-			path = Commands;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,17 +68,18 @@
 				A70B622C237AF87000A2BA73 /* Sources */,
 				A70B622D237AF87000A2BA73 /* Frameworks */,
 				A70B622E237AF87000A2BA73 /* Resources */,
-				B7E1751B27D291FD00EAF7B0 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				B7A0000126F0000000000001 /* OneClick */,
+			);
 			name = OneClick;
 			packageProductDependencies = (
-				B7E1751D27D2928300EAF7B0 /* LaunchAtLogin */,
 			);
-			productName = Ambar;
+			productName = OneClick;
 			productReference = A70B6230237AF87000A2BA73 /* OneClick.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -153,18 +89,16 @@
 		A70B6228237AF87000A2BA73 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1320;
-				ORGANIZATIONNAME = "Golden Chopper";
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2720;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					A70B622F237AF87000A2BA73 = {
 						CreatedOnToolsVersion = 11.1;
-						LastSwiftMigration = 1320;
 					};
 				};
 			};
 			buildConfigurationList = A70B622B237AF87000A2BA73 /* Build configuration list for PBXProject "OneClick" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -172,9 +106,8 @@
 				Base,
 			);
 			mainGroup = A70B6227237AF87000A2BA73;
-			packageReferences = (
-				B7E1751C27D2928300EAF7B0 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
-			);
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = A70B6231237AF87000A2BA73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -189,123 +122,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A70B623E237AF87700A2BA73 /* Main.storyboard in Resources */,
-				A70B623B237AF87700A2BA73 /* Preview Assets.xcassets in Resources */,
-				A70B6238237AF87700A2BA73 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B7E1751B27D291FD00EAF7B0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A70B622C237AF87000A2BA73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7D22575276A863A003286EC /* MenuView.swift in Sources */,
-				B76F381F27D2AF1900812227 /* SettingsView.swift in Sources */,
-				B76B2E3F276F775E008E6460 /* ShellCommands.swift in Sources */,
-				B7D225B0276A8E24003286EC /* Functions.swift in Sources */,
-				A70B6252237B078200A2BA73 /* EventMonitor.swift in Sources */,
-				A70B624C237B003900A2BA73 /* StatusBarController.swift in Sources */,
-				A70B6234237AF87000A2BA73 /* AppDelegate.swift in Sources */,
-				B71F5CDC27E8C04C00CA8ECE /* ToggleView.swift in Sources */,
-				A70B6250237B022700A2BA73 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		A70B623C237AF87700A2BA73 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A70B623D237AF87700A2BA73 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		A70B6241237AF87700A2BA73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -313,56 +168,20 @@
 		A70B6242237AF87700A2BA73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -370,29 +189,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OneClick/OneClick.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_ASSET_PATHS = "\"OneClick/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9P9AFAVH5T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = OneClick/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "OneClick uses System Events and Finder to change Dock, menu bar, appearance and Trash settings.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021–2026 mik3sw";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.2;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mike.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "OneClick/OneClick-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -400,28 +220,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OneClick/OneClick.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_ASSET_PATHS = "\"OneClick/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9P9AFAVH5T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = OneClick/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "OneClick uses System Events and Finder to change Dock, menu bar, appearance and Trash settings.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021–2026 mik3sw";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.2;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mike.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "OneClick/OneClick-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -447,25 +269,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B7E1751C27D2928300EAF7B0 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B7E1751D27D2928300EAF7B0 /* LaunchAtLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B7E1751C27D2928300EAF7B0 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
-			productName = LaunchAtLogin;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A70B6228237AF87000A2BA73 /* Project object */;
 }
